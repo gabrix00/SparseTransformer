@@ -1,4 +1,4 @@
-from spacy_dependency_15_06_v2 import create_dependency_pairs
+from spacy_dependency import create_dependency_pairs
 from from_parser2masking import from_parser2masking
 from from_tensor2masking import from_tensor2masking
 
