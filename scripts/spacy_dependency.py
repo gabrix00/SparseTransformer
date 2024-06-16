@@ -13,7 +13,7 @@ tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 #text= "I'm upset that my walkman broke and now I have to turn the stereo up really loud."
 #text="my walkman broke so i'm ups_et now i have just to turn the stereo up real loud"
 
-
+text= "He actually feels _bad_ that we're leaving.".lower()
 
 def spacy_dependency(text:str):
     text = normalizzation(text)
@@ -106,6 +106,8 @@ def create_dependency_pairs(text:str):
         #suffix_s= '_'+str(tup[1]).split('____')[1]
         suffix_f = int(tup[0].split('____')[1])
         suffix_s = int(tup[1].split('____')[1])
+        print(suffix_f)
+        print(suffix_s)
 
         
         # Controllo se entrambi i termini della tupla sono liste
@@ -120,7 +122,7 @@ def create_dependency_pairs(text:str):
                 index_adjustment = 0
                 #print(index,el) #debug
                 if index == 0:
-                    updated_left_list.append(el + '_'+str(suffix_f + index_adjustment)) # token + suffisso
+                    updated_left_list.append(el + '____'+str(suffix_f + index_adjustment)) # token + suffisso
                 else:
                     if el[:2]=='##': 
                         updated_left_list.append(el +  '____'+str(suffix_f + index_adjustment))
@@ -227,7 +229,7 @@ def create_dependency_pairs(text:str):
     return update_lista_dipendenze_mappate
 
 
-'''
+
 print('SPACY MAP:')
 print(spacy_map(text))
 print('\n\n')
@@ -240,4 +242,3 @@ print('\n\n')
 print('create_dependency_pairs:')
 print(create_dependency_pairs(text))
 print('\n\n')
-'''
