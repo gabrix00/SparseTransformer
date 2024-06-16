@@ -1,0 +1,2 @@
+text_concat: Conceptually cream skimming has two basic dimensions - product and geography. [SEP] Product and geography are what make cream skimming work. 
+percentage of attention: 0.1760204081632653
