@@ -29,10 +29,10 @@ def from_tensor2masking(text:str, rand_mask:torch.tensor, viz:bool = False, path
         for index, token in enumerate(decodes):
             if token[:2]=='##':
                 index_adjustment += 1 #ogni volta che si incontra un token con ## davanti si scala il suo indice e di tutti token successivi di 1
-                adjusted_decodes.append(str(token)+'_'+str(index - index_adjustment))
+                adjusted_decodes.append(str(token)+'____'+str(index - index_adjustment))
                 
             else:
-                adjusted_decodes.append(str(token)+'_'+str(index - index_adjustment))
+                adjusted_decodes.append(str(token)+'____'+str(index - index_adjustment))
         
         adjusted_decodes = ['[CLS]'] + adjusted_decodes + ['[SEP]']
             

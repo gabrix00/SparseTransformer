@@ -25,8 +25,8 @@ def mapping (tokens_list:list, dict_to_update:dict):
             maps[t] = decodes # lo riempio, questo dict non avrà gli idnci di posizone! perchè t è proviene dalla lista 'spacy_tokenizzation'! es: tokenizer:[token, ##izer]
     
     for k in dict_to_update: # dict_to_update è il dict di mappe chiave valore (chiave spacy, valore spacy), lo voglio aggiornare in modo tale che dove è presente un mismatch tra i due tokenixer, abbia chiave spacy, valore pythorch
-        if str(k).split('_')[0] in maps: # str(k).split('_')[0] mi serve ad epurare il token dal suffisso numerico, perchè la mappa in pythorch non lo presenta (infatti è tipo tokenizer_3:[token,##izer])
-            dict_to_update[k] = maps[str(k).split('_')[0]] #aggiorno il dict con la mappa corretta (in questo caso per tutti i token per cui c'è un mismatch tra i due tokenizer)
+        if str(k).split('____')[0] in maps: # str(k).split('____')[0] mi serve ad epurare il token dal suffisso numerico, perchè la mappa in pythorch non lo presenta (infatti è tipo tokenizer_3:[token,##izer])
+            dict_to_update[k] = maps[str(k).split('____')[0]] #aggiorno il dict con la mappa corretta (in questo caso per tutti i token per cui c'è un mismatch tra i due tokenizer)
  
     return dict_to_update
 
@@ -53,7 +53,7 @@ def spacy_map(text:str):
     tokens_mismatch = [token for token in spacy_tokenizzation if token not in bert_tokenizzation] # prendo la lista dei mismatch tra i due tokenizer
 
     #dict to pass to the mapping function che si chiamerà dict_to_update in 'mapping'
-    #spacy_tokenizzation_dict = dict([(token.text.lower()+'_'+str(index),token.text.lower()+'_'+str(index)) for index,token in enumerate(sentence)]) #mi creo le mappa con gli indici di posizione
+    #spacy_tokenizzation_dict = dict([(token.text.lower()+'____'+str(index),token.text.lower()+'____'+str(index)) for index,token in enumerate(sentence)]) #mi creo le mappa con gli indici di posizione
     spacy_tokenizzation_dict = dict([(token.text.lower(),token.text.lower()) for index,token in enumerate(sentence)]) #mi creo le mappa con gli indici di posizione
 
     final_map_dict = mapping(tokens_mismatch,spacy_tokenizzation_dict)

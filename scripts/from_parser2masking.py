@@ -25,12 +25,12 @@ def from_parser2masking(text:str, list_of_mapped_rel:list, viz:bool = False, pat
     for index, token in enumerate(decodes):
             if token[:2]=='##':
                 index_adjustment += 1
-                adjusted_decodes.append(str(token)+'_'+str(index - index_adjustment))
-                #print(str(token)+'_'+str(index - index_adjustment))#debug
+                adjusted_decodes.append(str(token)+'____'+str(index - index_adjustment))
+                #print(str(token)+'____'+str(index - index_adjustment))#debug
                 
             else:
-                adjusted_decodes.append(str(token)+'_'+str(index - index_adjustment))
-                #print(str(token)+'_'+str(index - index_adjustment)) #debug
+                adjusted_decodes.append(str(token)+'____'+str(index - index_adjustment))
+                #print(str(token)+'____'+str(index - index_adjustment)) #debug
 
     adjusted_decodes = ['[CLS]'] + adjusted_decodes + ['[SEP]']
 
@@ -49,7 +49,7 @@ def from_parser2masking(text:str, list_of_mapped_rel:list, viz:bool = False, pat
                 if (token,other_token) in list_of_mapped_rel:
                     mask[i][j] = 1
                     mask[j][i] = 1 #new modica per simmetria
-                elif other_token[:2]=='##' and (token.split('_')[1] == other_token.split('_')[1]) and (token != '[CLS]' or  token != '[SEP]'): #attendo stessa parola splittata es token_2, ##izer_2
+                elif other_token[:2]=='##' and (token.split('____')[1] == other_token.split('____')[1]) and (token != '[CLS]' or  token != '[SEP]'): #attendo stessa parola splittata es token_2, ##izer_2
                     mask[i][j] = 1
                     mask[j][i] = 1  # attendere sia token -->##izer in quanto stessa parola, ma anche ##izer-->token per completezza
             else:   
@@ -68,10 +68,10 @@ def from_parser2masking(text:str, list_of_mapped_rel:list, viz:bool = False, pat
         for index, token in enumerate(decodes):
             if token[:2]=='##':
                 index_adjustment += 1 #ogni volta che si incontra un token con ## davanti si scala il suo indice e di tutti token successivi di 1
-                adjusted_decodes.append(str(token)+'_'+str(index - index_adjustment))
+                adjusted_decodes.append(str(token)+'____'+str(index - index_adjustment))
                 
             else:
-                adjusted_decodes.append(str(token)+'_'+str(index - index_adjustment))
+                adjusted_decodes.append(str(token)+'____'+str(index - index_adjustment))
         
         adjusted_decodes = ['[CLS]'] + adjusted_decodes + ['[SEP]']
         

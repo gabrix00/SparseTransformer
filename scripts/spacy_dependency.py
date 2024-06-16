@@ -11,7 +11,7 @@ tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 #text = "A BERT tokenizer uses something known BERT tokenizer which is BERT case sensitive"
 #text = "(Read for Slate 's take on Jackson's findings.)"
 #text= "I'm upset that my walkman broke and now I have to turn the stereo up really loud."
-text="my walkman broke so i'm ups_et now i have just to turn the stereo up real loud"
+#text="my walkman broke so i'm ups_et now i have just to turn the stereo up real loud"
 
 
 
@@ -40,7 +40,7 @@ def spacy_dependency(text:str):
         #try:
         #print(f"mapped_token: {spacy_map(text)[str(token)]}")
         #print('\n')#debug
-        new_list_token_idx.append(token.text.lower()+'_'+str(index + adjusted_index))
+        new_list_token_idx.append(token.text.lower()+'____'+str(index + adjusted_index))
         if isinstance(spacy_map(text)[str(token)], list):
             for i, el in enumerate(spacy_map(text)[str(token)]):
                 # Salta il primo sottotoken (ad es. "token") e i sottottoken che iniziano con "##"
@@ -56,7 +56,7 @@ def spacy_dependency(text:str):
         #    continue
     #print(f"new_list_token_idx: {new_list_token_idx}")#debug   
     #print('\n\n')     
-    original_list_token_idx = [token.text.lower()+'_'+str(index)  for index,token in enumerate(filtered_sentence)]
+    original_list_token_idx = [token.text.lower()+'____'+str(index)  for index,token in enumerate(filtered_sentence)]
     #print(f"original_list_token_idx: {original_list_token_idx}")#debug   
     #print('\n\n')
 
@@ -72,8 +72,8 @@ def spacy_dependency(text:str):
         for child in token.children:
             if  child.text == ' ':
                 continue
-            #print((token.text.lower()+'_'+str(index), # mi creo tutte le coppie tenendo traccia dei relativi suffissi di posizione 
-                                    #child.text.lower()+'_'+str(list(filtered_sentence).index(child)))) #debug
+            #print((token.text.lower()+'____'+str(index), # mi creo tutte le coppie tenendo traccia dei relativi suffissi di posizione 
+                                    #child.text.lower()+'____'+str(list(filtered_sentence).index(child)))) #debug
 
 
     
@@ -86,12 +86,12 @@ def spacy_dependency(text:str):
         for child in token.children:
             if child.text == ' ':
                 continue
-            #print(token.text.lower()+'_'+str(index), child.text.lower()+'_'+str(list(sentence).index(child)))#old
-            #print(mapped_dict[token.text.lower()+'_'+str(index)],#debug
-            #      mapped_dict[child.text.lower()+'_'+str(list(filtered_sentence).index(child))])#debug
+            #print(token.text.lower()+'____'+str(index), child.text.lower()+'____'+str(list(sentence).index(child)))#old
+            #print(mapped_dict[token.text.lower()+'____'+str(index)],#debug
+            #      mapped_dict[child.text.lower()+'____'+str(list(filtered_sentence).index(child))])#debug
             #print('\n') #debug
-            tokens_children_dep.append((mapped_dict[token.text.lower()+'_'+str(index)],
-                  mapped_dict[child.text.lower()+'_'+str(list(filtered_sentence).index(child))]))
+            tokens_children_dep.append((mapped_dict[token.text.lower()+'____'+str(index)],
+                  mapped_dict[child.text.lower()+'____'+str(list(filtered_sentence).index(child))]))
 
     return tokens_children_dep
 
@@ -102,47 +102,47 @@ def create_dependency_pairs(text:str):
 
     lista_dipendenze_mappate = [] #secondo il tokenizer di bert
     for tup in lista_dipendenze:
-        #suffix_f= '_'+str(tup[0]).split('_')[1]
-        #suffix_s= '_'+str(tup[1]).split('_')[1]
-        suffix_f = int(tup[0].split('_')[1])
-        suffix_s = int(tup[1].split('_')[1])
+        #suffix_f= '_'+str(tup[0]).split('____')[1]
+        #suffix_s= '_'+str(tup[1]).split('____')[1]
+        suffix_f = int(tup[0].split('____')[1])
+        suffix_s = int(tup[1].split('____')[1])
 
         
         # Controllo se entrambi i termini della tupla sono liste
-        if isinstance(spacy_map(text)[tup[0].split('_')[0]], list) and isinstance(spacy_map(text)[tup[1].split('_')[0]], list):
+        if isinstance(spacy_map(text)[tup[0].split('____')[0]], list) and isinstance(spacy_map(text)[tup[1].split('____')[0]], list):
             #print('1 caso') #debug
-            #print(spacy_map(text)[tup[0].split('_')[0]])#debug
-            #print(spacy_map(text)[tup[1].split('_')[0]])#debug
+            #print(spacy_map(text)[tup[0].split('____')[0]])#debug
+            #print(spacy_map(text)[tup[1].split('____')[0]])#debug
             # Aggiungi i suffissi appropriati a ogni elemento delle liste
             #updated_left_list = [el + suffix_f for el in spacy_map(text)[tup[0]] if el[:2]=='##']
             updated_left_list= []
-            for index, el in enumerate(spacy_map(text)[tup[0].split('_')[0]]): #se prendiamo il caso di [token,##izer] 
+            for index, el in enumerate(spacy_map(text)[tup[0].split('____')[0]]): #se prendiamo il caso di [token,##izer] 
                 index_adjustment = 0
                 #print(index,el) #debug
                 if index == 0:
                     updated_left_list.append(el + '_'+str(suffix_f + index_adjustment)) # token + suffisso
                 else:
                     if el[:2]=='##': 
-                        updated_left_list.append(el +  '_'+str(suffix_f + index_adjustment))
+                        updated_left_list.append(el +  '____'+str(suffix_f + index_adjustment))
                         # ##izer + suffisso (com'è giusto che sia dato che si tratta della stessa parola)
                     else:
                         index_adjustment += 1
-                        updated_left_list.append(el +  '_'+str(suffix_f + index_adjustment))
+                        updated_left_list.append(el +  '____'+str(suffix_f + index_adjustment))
                         #caso in cui il secondo elemento non fa parte della stessa parola es in [',m] --> m 
             
             updated_right_list = []
-            for index, el in enumerate(spacy_map(text)[tup[1].split('_')[0]]): #se prendiamo il caso di [token,##izer] 
+            for index, el in enumerate(spacy_map(text)[tup[1].split('____')[0]]): #se prendiamo il caso di [token,##izer] 
                 index_adjustment = 0
                 #print(index,el) #debug
                 if index == 0:
-                    updated_right_list.append(el +  '_'+str(suffix_s + index_adjustment)) # token + suffisso
+                    updated_right_list.append(el +  '____'+str(suffix_s + index_adjustment)) # token + suffisso
                 else:
                     if el[:2]=='##': 
-                        updated_right_list.append(el +  '_'+str(suffix_s + index_adjustment))
+                        updated_right_list.append(el +  '____'+str(suffix_s + index_adjustment))
                         # ##izer + suffisso (com'è giusto che sia dato che si tratta della stessa parola)
                     else:
                         index_adjustment += 1
-                        updated_right_list.append(el +  '_'+str(suffix_s + index_adjustment))
+                        updated_right_list.append(el +  '____'+str(suffix_s + index_adjustment))
                         #caso in cui il secondo elemento non fa parte della stessa parola es in [',m] --> m 
 
             #print('\n')
@@ -152,21 +152,21 @@ def create_dependency_pairs(text:str):
             continue
 
         # Controllo se solo il primo termine della tupla è una lista
-        if isinstance(spacy_map(text)[tup[0].split('_')[0]], list):
+        if isinstance(spacy_map(text)[tup[0].split('____')[0]], list):
             #print('2 caso') #debug
             updated_left_list= []
-            for index, el in enumerate(spacy_map(text)[tup[0].split('_')[0]]): #se prendiamo il caso di [token,##izer] 
+            for index, el in enumerate(spacy_map(text)[tup[0].split('____')[0]]): #se prendiamo il caso di [token,##izer] 
                 index_adjustment = 0
                 #print(index,el) #debug
                 if index == 0:
-                    updated_left_list.append(el +  '_'+str(suffix_f + index_adjustment)) # token + suffisso
+                    updated_left_list.append(el +  '____'+str(suffix_f + index_adjustment)) # token + suffisso
                 else:
                     if el[:2]=='##': 
-                        updated_left_list.append(el +  '_'+str(suffix_f + index_adjustment))
+                        updated_left_list.append(el +  '____'+str(suffix_f + index_adjustment))
                         # ##izer + suffisso (com'è giusto che sia dato che si tratta della stessa parola)
                     else:
                         index_adjustment += 1
-                        updated_left_list.append(el +  '_'+str(suffix_f + index_adjustment))
+                        updated_left_list.append(el +  '____'+str(suffix_f + index_adjustment))
             #print('\n')
         # Se il valore è una lista, aggiungi il suffisso a ogni elemento
             #updated_left_list = [el + suffix_f for el in spacy_map(text)[tup[0]]]
@@ -175,21 +175,21 @@ def create_dependency_pairs(text:str):
             continue
 
         # Controllo se solo il secondo termine della tupla è una lista
-        if isinstance(spacy_map(text)[tup[1].split('_')[0]], list):
+        if isinstance(spacy_map(text)[tup[1].split('____')[0]], list):
             #print('3 caso') #debug
             updated_right_list = []
-            for index, el in enumerate(spacy_map(text)[tup[1].split('_')[0]]): #se prendiamo il caso di [token,##izer] 
+            for index, el in enumerate(spacy_map(text)[tup[1].split('____')[0]]): #se prendiamo il caso di [token,##izer] 
                 index_adjustment = 0
                 #print(index,el) #debug
                 if index == 0:
-                    updated_right_list.append(el +  '_'+str(suffix_s + index_adjustment)) # token + suffisso
+                    updated_right_list.append(el +  '____'+str(suffix_s + index_adjustment)) # token + suffisso
                 else:
                     if el[:2]=='##': 
-                        updated_right_list.append(el +  '_'+str(suffix_s + index_adjustment))
+                        updated_right_list.append(el +  '____'+str(suffix_s + index_adjustment))
                         # ##izer + suffisso (com'è giusto che sia dato che si tratta della stessa parola)
                     else:
                         index_adjustment += 1
-                        updated_right_list.append(el +  '_'+str(suffix_s + index_adjustment))
+                        updated_right_list.append(el +  '____'+str(suffix_s + index_adjustment))
             #print('\n')#debug
             #updated_right_list = [el + suffix_s for el in spacy_map(text)[tup[1]]]
             lista_dipendenze_mappate.append((tup[0],updated_right_list))
