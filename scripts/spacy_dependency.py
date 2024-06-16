@@ -11,7 +11,7 @@ tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 #text = "A BERT tokenizer uses something known BERT tokenizer which is BERT case sensitive"
 #text = "(Read for Slate 's take on Jackson's findings.)"
 #text= "I'm upset that my walkman broke and now I have to turn the stereo up really loud."
-#text="my walkman broke so i'm upset now i have just to turn the stereo up real loud"
+text="my walkman broke so i'm ups_et now i have just to turn the stereo up real loud"
 
 
 
