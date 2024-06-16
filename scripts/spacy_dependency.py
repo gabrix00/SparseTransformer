@@ -2,6 +2,7 @@
 ### ATTENZIONE QUESTO SCRIPT è SPACY-DEPENDENCY_15_06_V2 ####
 import spacy
 from spacy_mapping import spacy_map
+from normalization import normalizzation
 import numpy as np
 from transformers import AutoTokenizer
 
@@ -15,6 +16,7 @@ tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
 
 def spacy_dependency(text:str):
+    text = normalizzation(text)
     #print(spacy_map(text))
     #print('\n\n')
     sentence = nlp(text)
@@ -95,6 +97,7 @@ def spacy_dependency(text:str):
 
 
 def create_dependency_pairs(text:str):
+    text = normalizzation(text)
     lista_dipendenze = spacy_dependency(text)
 
     lista_dipendenze_mappate = [] #secondo il tokenizer di bert

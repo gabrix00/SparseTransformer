@@ -11,7 +11,11 @@ import time
 from tqdm.auto import tqdm
 from datasets import DatasetDict
 from torch.utils.data import DataLoader
-from scripts.masking_process import masking, rmasking, mask_multiple_sentences
+
+import sys
+sys.path.append(os.path.join(os.getcwd(),'scripts'))
+
+from masking_process import masking
 
 tokenizer = AutoTokenizer.from_pretrained("textattack/bert-base-uncased-yelp-polarity")
 

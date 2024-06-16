@@ -1,12 +1,15 @@
 import spacy
 #from transformers import BertTokenizer
 from transformers import AutoTokenizer
+from normalization import normalizzation
 
 nlp = spacy.load("en_core_web_sm")
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 #text= "(Read  for Slate 's take on Jackson's findings.)"
 #text = "A BERT tokenizer uses something known BERT tokenizer which is BERT case sensitive"
 #text= "my walkman broke so i'm upset now i just have to turn the stereo up real loud"
+text="Give Microsoft a monopoly on browsers, and you'll intensify the downward pressure on the price of its operating systems. [SEP] The downward pressure on the price of its operating systems will intensify if Microsoft is given a monopoly on browsers."
+
 
 def mapping (tokens_list:list, dict_to_update:dict):
     maps = {}
@@ -33,6 +36,10 @@ def mapping (tokens_list:list, dict_to_update:dict):
 def spacy_map(text:str):
     
     #tokenizer Spacy and Bert
+    text= normalizzation(text)
+    if '[SEP]' in text:
+        #print(True)
+        text = text.replace(' [SEP] ','') #RIMUOVO [SPAZIO]+[SEP]+[SPAZIO] PER COME LO CREO NELLA CONCAT
 
     sentence = nlp(text)
     #tokens = tokenizer(text,add_special_tokens=False,return_tensors='pt',return_offsets_mapping=True) #NotImplementedError: return_offset_mapping is not available when using Python tokenizers. To use this feature, change your tokenizer to one deriving from transformers.PreTrainedTokenizerFast
@@ -62,6 +69,6 @@ def spacy_map(text:str):
 
 
 if __name__ == '__main__':
-    print(spacy_map(text))
+    print(spacy_map(normalizzation(text)))
 
 
