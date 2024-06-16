@@ -1,2 +1,0 @@
-text_concat: One of our number will carry out your instructions minutely. [SEP] A member of my team will execute your orders with immense precision.
-percentage of attention: 0.16581632653061223

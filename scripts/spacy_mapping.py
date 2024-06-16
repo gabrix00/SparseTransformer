@@ -8,7 +8,7 @@ tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 #text= "(Read  for Slate 's take on Jackson's findings.)"
 #text = "A BERT tokenizer uses something known BERT tokenizer which is BERT case sensitive"
 #text= "my walkman broke so i'm upset now i just have to turn the stereo up real loud"
-text="Give Microsoft a monopoly on browsers, and you'll intensify the downward pressure on the price of its operating systems. [SEP] The downward pressure on the price of its operating systems will intensify if Microsoft is given a monopoly on browsers."
+#text="Give Microsoft a monopoly on browsers, and you'll intensify the downward pressure on the price of its operating systems. [SEP] The downward pressure on the price of its operating systems will intensify if Microsoft is given a monopoly on browsers."
 
 
 def mapping (tokens_list:list, dict_to_update:dict):

@@ -1,2 +1,0 @@
-premise: One of our number will carry out your instructions minutely.
-percentage of attention: 0.32653061224489793
