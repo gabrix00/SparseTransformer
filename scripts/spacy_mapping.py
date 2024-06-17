@@ -62,6 +62,11 @@ def spacy_map(text:str):
     #    if k == " " and v == []:
     #        print('Spacy found an empty token " " mapped to [] in Bert Tokenizer. It was removed for alignment purposes.')
 
+    for k, v in final_map_dict.items():
+        if k != " " and isinstance(v,list) and len(v)==1:
+            print('Spacy found a token mapped in a differen way Bert Tokenizer. ')
+            print(k,v)
+
     #if " " in final_map_dict and final_map_dict[" "] == []:
     #    del final_map_dict[" "]
 

@@ -147,8 +147,8 @@ class Dataset:
         gabriel_mask_class,gabriel_mask_mlm = mask_multiple_sentences(text_a,text_b)
 
         #for viz
-        rmasking(text=text_a,rand_mask=gabriel_mask_mlm,viz=True)
-        rmasking(text=text_concat,rand_mask=gabriel_mask_class,viz=True)
+        #rmasking(text=text_a,rand_mask=gabriel_mask_mlm,viz=True)
+        #rmasking(text=text_concat,rand_mask=gabriel_mask_class,viz=True)
         
         #if f'gm_{id}.npy' not in os.listdir(gm_class_img_dir): #too memory
         #    rmasking(text=text_concat,rand_mask=gabriel_mask,viz=True, path=os.path.join(gm_class_img_dir,f'gm_{id}')) # too memory
@@ -226,7 +226,7 @@ def main():
     dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
     #sliced_train_dataset = DatasetDict(dataset["train"][3952:3954])
     #sliced_train_dataset = DatasetDict(dataset["train"][3949:3954])
-    sliced_train_dataset = DatasetDict(dataset["train"][:1000])
+    sliced_train_dataset = DatasetDict(dataset["train"][:100000])
 
     #print(sliced_train_dataset)
 

@@ -124,14 +124,14 @@ def create_dependency_pairs(text:str):
         #print('\n\n') #debug
         #print(tup[1].split('____')[1][:uc2-4])#debug
         if uc1>4:
-            print(True)
+            print('underscore_count grateher than 4 for tup1')
             spacy_mapping_first = spacy_map(text)[tup[0].split('____')[1][:uc1-4]]
             #print(spacy_map(text)[tup[0].split('____')[1][:uc1-4]])
         else:
             spacy_mapping_first = spacy_map(text)[tup[0].split('____')[0]]
             #print(spacy_map(text)[tup[0].split('____')[0]])
         if uc2>4:
-            print(True)
+            print('underscore_count grateher than 4 for tup2')
             spacy_mapping_second = spacy_map(text)[tup[1].split('____')[1][:uc2-4]]
             #print(spacy_map(text)[tup[1].split('____')[1][:uc2-4]])
         else:
