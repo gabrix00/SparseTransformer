@@ -75,8 +75,8 @@ def from_parser2masking(text:str, list_of_mapped_rel:list, viz:bool = False, pat
         
         adjusted_decodes = ['[CLS]'] + adjusted_decodes + ['[SEP]']
         
-        plt.xticks(range(len([el for el in adjusted_decodes])), adjusted_decodes,rotation=45)
-        plt.yticks(range(len([el for el in adjusted_decodes])), adjusted_decodes,rotation=45)
+        plt.xticks(range(len([el for el in adjusted_decodes])), adjusted_decodes,rotation=90)
+        plt.yticks(range(len([el for el in adjusted_decodes])), adjusted_decodes,rotation=0)
         plt.colorbar()
 
         # Aggiungere griglia per bordi delle celle

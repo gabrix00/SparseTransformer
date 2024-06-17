@@ -17,7 +17,7 @@ def masking (text, viz = False, path=None):
     dependency_pairs_list = create_dependency_pairs(text)#.lower()) #text.lower() it's must otherwise creation pairs failed!
     if viz: 
         if path:
-            return from_parser2masking(text,dependency_pairs_list,True, path = path)
+            return from_parser2masking(text,dependency_pairs_list,viz=True, path = path)
         else: 
             return from_parser2masking(text,dependency_pairs_list,viz=True)
     else:

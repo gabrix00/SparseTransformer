@@ -225,8 +225,8 @@ def main():
     dataset = load_dataset("LysandreJik/glue-mnli-train")
     dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
     #sliced_train_dataset = DatasetDict(dataset["train"][3952:3954])
-    sliced_train_dataset = DatasetDict(dataset["train"][3949:3954])
-    #sliced_train_dataset = DatasetDict(dataset["train"][:20])
+    #sliced_train_dataset = DatasetDict(dataset["train"][3949:3954])
+    sliced_train_dataset = DatasetDict(dataset["train"][:1000])
 
     #print(sliced_train_dataset)
 
