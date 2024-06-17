@@ -85,7 +85,7 @@ def normalizzation(text):
         "shan ' t": "shall not",
     }
        
-    
+    text = text.lower()
     #print("Testo originale:", text)
     for pattern, replacement in negation_mapping.items():
         text = re.sub(r'\b{}\b'.format(re.escape(pattern)), replacement, text)

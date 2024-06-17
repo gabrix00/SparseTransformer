@@ -15,6 +15,7 @@ tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 #text="my walkman broke so i'm ups_et now i have just to turn the stereo up real loud"
 
 #text= "He actually feels _bad_ that we're leaving.".lower()
+#text= "Don't get too concerned if you seem to be following a very roundabout route."# [SEP] Do not be surprised if your route in not directly to your destination.".lower()
 
 def underscore_count(text):
     
@@ -27,7 +28,7 @@ def underscore_count(text):
     return  underscore_count
 
 def spacy_dependency(text:str):
-    text = normalizzation(text)
+    #text = normalizzation(text)
     #print(spacy_map(text))
     #print('\n\n')
     sentence = nlp(text)
@@ -108,7 +109,7 @@ def spacy_dependency(text:str):
 
 
 def create_dependency_pairs(text:str):
-    text = normalizzation(text)
+    #text = normalizzation(text)
     lista_dipendenze = spacy_dependency(text)
 
     lista_dipendenze_mappate = [] #secondo il tokenizer di bert
@@ -145,19 +146,19 @@ def create_dependency_pairs(text:str):
             #suffix_s = int(tup[1].split('____')[1])
             suffix_f = int(tup[0].split('____')[1])
             suffix_s = int(tup[1].split('____')[1])
-            print(suffix_f)
-            print(suffix_s)
+            #print(suffix_f)
+            #print(suffix_s)
         except:
 
             suffix_f = int(re.search(r'\d+', tup[0].split('____')[1]).group())
             suffix_s = int(re.search(r'\d+', tup[1].split('____')[1]).group())
-            print(suffix_f)
-            print(suffix_s)
+            #print(suffix_f)
+            #print(suffix_s)
 
         
         # Controllo se entrambi i termini della tupla sono liste
         if isinstance(spacy_mapping_first, list) and isinstance(spacy_mapping_second, list):
-            print('1 caso') #debug
+            #print('1 caso') #debug
             #print(spacy_map(text)[tup[0].split('____')[0]])#debug
             #print(spacy_map(text)[tup[1].split('____')[0]])#debug
             # Aggiungi i suffissi appropriati a ogni elemento delle liste
@@ -200,7 +201,7 @@ def create_dependency_pairs(text:str):
 
         # Controllo se solo il primo termine della tupla è una lista
         if isinstance(spacy_mapping_first, list):
-            print('2 caso') #debug
+            #print('2 caso') #debug
             updated_left_list= []
             for index, el in enumerate(spacy_mapping_first): #se prendiamo il caso di [token,##izer] 
                 index_adjustment = 0
@@ -224,7 +225,7 @@ def create_dependency_pairs(text:str):
 
         # Controllo se solo il secondo termine della tupla è una lista
         if isinstance(spacy_mapping_second, list):
-            print('3 caso') #debug
+            #print('3 caso') #debug
             updated_right_list = []
             for index, el in enumerate(spacy_mapping_second): #se prendiamo il caso di [token,##izer] 
                 index_adjustment = 0

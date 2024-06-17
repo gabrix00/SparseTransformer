@@ -7,7 +7,7 @@ from normalization import normalizzation
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
 def from_tensor2masking(text:str, rand_mask:torch.tensor, viz:bool = False, path=None, random=False):
-    text = normalizzation(text)
+    #text = normalizzation(text) #già il testo è normalizzato nel get.item
 
     encodes = tokenizer(text,add_special_tokens=False,return_tensors='pt')
     encodes = encodes['input_ids'][0].tolist()
@@ -55,8 +55,8 @@ def from_tensor2masking(text:str, rand_mask:torch.tensor, viz:bool = False, path
         if path:
             plt.savefig(path, dpi=300, bbox_inches="tight")
 
-        plt.close()
-        #plt.show() #momentanemante
+        #plt.close()
+        plt.show() #momentanemante
 
     #print(mask)
     #return torch.tensor(mask)

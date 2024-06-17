@@ -8,7 +8,7 @@ from normalization import normalizzation
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
 def from_parser2masking(text:str, list_of_mapped_rel:list, viz:bool = False, path=None):
-    text = normalizzation(text) 
+    #text = normalizzation(text) #già il testo è normalizzato nel get.item
 
     encodes = tokenizer(text,add_special_tokens=False,return_tensors='pt')
     encodes = encodes['input_ids'][0].tolist()

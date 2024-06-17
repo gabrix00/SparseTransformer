@@ -14,7 +14,7 @@ import numpy  as np
 import torch
 
 def masking (text, viz = False, path=None):
-    dependency_pairs_list = create_dependency_pairs(text.lower()) #text.lower() it's must otherwise creation pairs failed!
+    dependency_pairs_list = create_dependency_pairs(text)#.lower()) #text.lower() it's must otherwise creation pairs failed!
     if viz: 
         if path:
             return from_parser2masking(text,dependency_pairs_list,True, path = path)
@@ -34,7 +34,7 @@ def rmasking (text,rand_mask,viz = False, path=None): # Dont use text.lower()! i
         return from_tensor2masking(text,rand_mask)
 
 def mask_multiple_sentences(text1,text2):
-    text = text1+' [SEP] '+text2
+    #text = text1+' [SEP] '+text2
 
     t1 = masking(text1)
     t2 = masking(text2)
