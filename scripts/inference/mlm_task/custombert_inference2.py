@@ -406,10 +406,22 @@ class CustomSelfAttention(nn.Module):
                 attention_scores = attention_scores + relative_position_scores_query + relative_position_scores_key
 
         attention_scores = attention_scores / math.sqrt(self.attention_head_size)
+        #print(attention_scores)
 
        
         #logger.info('dim of attention score is :' +str(attention_scores.shape))
 
+
+        if attention_mask is not None:
+            attention_scores = attention_scores + attention_mask
+        
+        #print(attention_scores)
+
+        # Normalize the attention scores to probabilities.
+        attention_probs = nn.functional.softmax(attention_scores, dim=-1)
+
+        #print(attention_probs)
+        
         if gabriel_mask is not None:
             #logger.info('dim of gabriel_mask is :' + str(gabriel_mask.shape))
             #logger.info('dim of gabriel_mask is :' + str(len(gabriel_mask.shape)))
@@ -425,20 +437,13 @@ class CustomSelfAttention(nn.Module):
                 #logger.info('dim of gabriel_mask is :' + str(gabriel_mask.shape))
 
 
-            attention_scores = torch.mul(attention_scores, gabriel_mask)
-
-        if attention_mask is not None:
-            attention_scores = attention_scores + attention_mask
-
-        # Normalize the attention scores to probabilities.
-        attention_probs = nn.functional.softmax(attention_scores, dim=-1)
-     
-
-        
+            attention_probs = torch.mul(attention_probs, gabriel_mask)
 
         # This is actually dropping out entire tokens to attend to, which might
         # seem a bit unusual, but is taken from the original Transformer paper.
-        attention_probs = self.dropout(attention_probs)
+        #attention_probs = self.dropout(attention_probs)
+        #print(attention_probs)
+        
         
 
         if head_mask is not None:
