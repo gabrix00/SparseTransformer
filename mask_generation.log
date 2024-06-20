@@ -8044,3 +8044,101 @@
 }
 
 
+2024-06-20 19:38:57,956 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:38:57,956 - INFO - Key: pm, Value: ['pm']
+2024-06-20 19:38:57,956 - INFO - Spacy token: ['open', 'june', 'september', 'daily', '9:30am', '6:30pm', ';', 'october', 'may', '12:30', '5', 'pm', ';', 'adults', 'ira2', ',', 'children', 'ira1', '.']
+2024-06-20 19:38:57,956 - INFO - Bert token: ['open', 'june', 'september', 'daily', '9', ':', '30', '##am', '6', ':', '30', '##pm', ';', 'october', 'may', '12', ':', '30', '5', '##pm', ';', 'adults', 'ira', '##2', ',', 'children', 'ira', '##1', '.']
+2024-06-20 19:38:57,956 - INFO - tokens mismatch: ['9:30am', '6:30pm', '12:30', 'pm', 'ira2', 'ira1']
+2024-06-20 19:38:57,956 - INFO - {
+    "open": "open",
+    "june": "june",
+    "september": "september",
+    "daily": "daily",
+    "9:30am": [
+        "9",
+        ":",
+        "30",
+        "##am"
+    ],
+    "6:30pm": [
+        "6",
+        ":",
+        "30",
+        "##pm"
+    ],
+    ";": ";",
+    "october": "october",
+    "may": "may",
+    "12:30": [
+        "12",
+        ":",
+        "30"
+    ],
+    "5": "5",
+    "pm": [
+        "pm"
+    ],
+    "adults": "adults",
+    "ira2": [
+        "ira",
+        "##2"
+    ],
+    ",": ",",
+    "children": "children",
+    "ira1": [
+        "ira",
+        "##1"
+    ],
+    ".": "."
+}
+
+
+2024-06-20 19:38:57,968 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:38:57,968 - INFO - Key: pm, Value: ['pm']
+2024-06-20 19:38:57,968 - INFO - Spacy token: ['open', 'june', 'september', 'daily', '9:30am', '6:30pm', ';', 'october', 'may', '12:30', '5', 'pm', ';', 'adults', 'ira2', ',', 'children', 'ira1', '.']
+2024-06-20 19:38:57,968 - INFO - Bert token: ['open', 'june', 'september', 'daily', '9', ':', '30', '##am', '6', ':', '30', '##pm', ';', 'october', 'may', '12', ':', '30', '5', '##pm', ';', 'adults', 'ira', '##2', ',', 'children', 'ira', '##1', '.']
+2024-06-20 19:38:57,968 - INFO - tokens mismatch: ['9:30am', '6:30pm', '12:30', 'pm', 'ira2', 'ira1']
+2024-06-20 19:38:57,968 - INFO - {
+    "open": "open",
+    "june": "june",
+    "september": "september",
+    "daily": "daily",
+    "9:30am": [
+        "9",
+        ":",
+        "30",
+        "##am"
+    ],
+    "6:30pm": [
+        "6",
+        ":",
+        "30",
+        "##pm"
+    ],
+    ";": ";",
+    "october": "october",
+    "may": "may",
+    "12:30": [
+        "12",
+        ":",
+        "30"
+    ],
+    "5": "5",
+    "pm": [
+        "pm"
+    ],
+    "adults": "adults",
+    "ira2": [
+        "ira",
+        "##2"
+    ],
+    ",": ",",
+    "children": "children",
+    "ira1": [
+        "ira",
+        "##1"
+    ],
+    ".": "."
+}
+
+
