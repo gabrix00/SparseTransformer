@@ -8142,3 +8142,205 @@
 }
 
 
+2024-06-20 19:42:44,698 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:42:44,699 - INFO - Key: m, Value: ['m']
+2024-06-20 19:42:44,699 - INFO - Spacy token: ['the', 'tallest', 'minaret', 'in', 'cairo', 'is', '99', 'm', 'high', '.']
+2024-06-20 19:42:44,699 - INFO - Bert token: ['the', 'tallest', 'mina', '##ret', 'in', 'cairo', 'is', '99', '##m', 'high', '.']
+2024-06-20 19:42:44,699 - INFO - tokens mismatch: ['minaret', 'm']
+2024-06-20 19:42:44,699 - INFO - {
+    "the": "the",
+    "tallest": "tallest",
+    "minaret": [
+        "mina",
+        "##ret"
+    ],
+    "in": "in",
+    "cairo": "cairo",
+    "is": "is",
+    "99": "99",
+    "m": [
+        "m"
+    ],
+    "high": "high",
+    ".": "."
+}
+
+
+2024-06-20 19:42:44,707 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:42:44,707 - INFO - Key: m, Value: ['m']
+2024-06-20 19:42:44,707 - INFO - Spacy token: ['the', 'tallest', 'minaret', 'in', 'cairo', 'is', '99', 'm', 'high', '.']
+2024-06-20 19:42:44,707 - INFO - Bert token: ['the', 'tallest', 'mina', '##ret', 'in', 'cairo', 'is', '99', '##m', 'high', '.']
+2024-06-20 19:42:44,708 - INFO - tokens mismatch: ['minaret', 'm']
+2024-06-20 19:42:44,708 - INFO - {
+    "the": "the",
+    "tallest": "tallest",
+    "minaret": [
+        "mina",
+        "##ret"
+    ],
+    "in": "in",
+    "cairo": "cairo",
+    "is": "is",
+    "99": "99",
+    "m": [
+        "m"
+    ],
+    "high": "high",
+    ".": "."
+}
+
+
+2024-06-20 19:42:45,184 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:42:45,184 - INFO - Key: pm, Value: ['pm']
+2024-06-20 19:42:45,184 - INFO - Spacy token: ['shops', 'in', 'central', 'are', 'an', 'exception', ';', 'they', 'generally', 'close', 'at', '6', 'pm', 'and', 'are', 'not', 'open', 'on', 'sunday', '.']
+2024-06-20 19:42:45,184 - INFO - Bert token: ['shops', 'in', 'central', 'are', 'an', 'exception', ';', 'they', 'generally', 'close', 'at', '6', '##pm', 'and', 'are', 'not', 'open', 'on', 'sunday', '.']
+2024-06-20 19:42:45,184 - INFO - tokens mismatch: ['pm']
+2024-06-20 19:42:45,184 - INFO - {
+    "shops": "shops",
+    "in": "in",
+    "central": "central",
+    "are": "are",
+    "an": "an",
+    "exception": "exception",
+    ";": ";",
+    "they": "they",
+    "generally": "generally",
+    "close": "close",
+    "at": "at",
+    "6": "6",
+    "pm": [
+        "pm"
+    ],
+    "and": "and",
+    "not": "not",
+    "open": "open",
+    "on": "on",
+    "sunday": "sunday",
+    ".": "."
+}
+
+
+2024-06-20 19:42:45,194 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:42:45,194 - INFO - Key: pm, Value: ['pm']
+2024-06-20 19:42:45,194 - INFO - Spacy token: ['shops', 'in', 'central', 'are', 'an', 'exception', ';', 'they', 'generally', 'close', 'at', '6', 'pm', 'and', 'are', 'not', 'open', 'on', 'sunday', '.']
+2024-06-20 19:42:45,194 - INFO - Bert token: ['shops', 'in', 'central', 'are', 'an', 'exception', ';', 'they', 'generally', 'close', 'at', '6', '##pm', 'and', 'are', 'not', 'open', 'on', 'sunday', '.']
+2024-06-20 19:42:45,194 - INFO - tokens mismatch: ['pm']
+2024-06-20 19:42:45,194 - INFO - {
+    "shops": "shops",
+    "in": "in",
+    "central": "central",
+    "are": "are",
+    "an": "an",
+    "exception": "exception",
+    ";": ";",
+    "they": "they",
+    "generally": "generally",
+    "close": "close",
+    "at": "at",
+    "6": "6",
+    "pm": [
+        "pm"
+    ],
+    "and": "and",
+    "not": "not",
+    "open": "open",
+    "on": "on",
+    "sunday": "sunday",
+    ".": "."
+}
+
+
+2024-06-20 19:43:06,736 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:43:06,736 - INFO - Key: we, Value: ['we']
+2024-06-20 19:43:06,736 - INFO - Spacy token: ['(', 'i', "'d", 'rather', 'we', 'd', 'in', 'hell', ',', 'and', 'so', 'would', 'she', '.', ')']
+2024-06-20 19:43:06,736 - INFO - Bert token: ['(', 'i', "'", 'd', 'rather', 'wed', 'in', 'hell', ',', 'and', 'so', 'would', 'she', '.', ')']
+2024-06-20 19:43:06,736 - INFO - tokens mismatch: ["'d", 'we']
+2024-06-20 19:43:06,737 - INFO - {
+    "(": "(",
+    "i": "i",
+    "'d": [
+        "'",
+        "d"
+    ],
+    "rather": "rather",
+    "we": [
+        "we"
+    ],
+    "d": "d",
+    "in": "in",
+    "hell": "hell",
+    ",": ",",
+    "and": "and",
+    "so": "so",
+    "would": "would",
+    "she": "she",
+    ".": ".",
+    ")": ")"
+}
+
+
+2024-06-20 19:43:06,746 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:43:06,746 - INFO - Key: we, Value: ['we']
+2024-06-20 19:43:06,746 - INFO - Spacy token: ['(', 'i', "'d", 'rather', 'we', 'd', 'in', 'hell', ',', 'and', 'so', 'would', 'she', '.', ')']
+2024-06-20 19:43:06,746 - INFO - Bert token: ['(', 'i', "'", 'd', 'rather', 'wed', 'in', 'hell', ',', 'and', 'so', 'would', 'she', '.', ')']
+2024-06-20 19:43:06,746 - INFO - tokens mismatch: ["'d", 'we']
+2024-06-20 19:43:06,746 - INFO - {
+    "(": "(",
+    "i": "i",
+    "'d": [
+        "'",
+        "d"
+    ],
+    "rather": "rather",
+    "we": [
+        "we"
+    ],
+    "d": "d",
+    "in": "in",
+    "hell": "hell",
+    ",": ",",
+    "and": "and",
+    "so": "so",
+    "would": "would",
+    "she": "she",
+    ".": ".",
+    ")": ")"
+}
+
+
+2024-06-20 19:43:06,749 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:43:06,749 - INFO - Key: d, Value: ['d']
+2024-06-20 19:43:06,749 - INFO - Spacy token: ['we', 'would', 'rather', 'we', 'd', 'in', 'heaven', '.']
+2024-06-20 19:43:06,749 - INFO - Bert token: ['we', 'would', 'rather', 'wed', 'in', 'heaven', '.']
+2024-06-20 19:43:06,749 - INFO - tokens mismatch: ['d']
+2024-06-20 19:43:06,749 - INFO - {
+    "we": "we",
+    "would": "would",
+    "rather": "rather",
+    "d": [
+        "d"
+    ],
+    "in": "in",
+    "heaven": "heaven",
+    ".": "."
+}
+
+
+2024-06-20 19:43:06,756 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:43:06,756 - INFO - Key: d, Value: ['d']
+2024-06-20 19:43:06,756 - INFO - Spacy token: ['we', 'would', 'rather', 'we', 'd', 'in', 'heaven', '.']
+2024-06-20 19:43:06,756 - INFO - Bert token: ['we', 'would', 'rather', 'wed', 'in', 'heaven', '.']
+2024-06-20 19:43:06,756 - INFO - tokens mismatch: ['d']
+2024-06-20 19:43:06,756 - INFO - {
+    "we": "we",
+    "would": "would",
+    "rather": "rather",
+    "d": [
+        "d"
+    ],
+    "in": "in",
+    "heaven": "heaven",
+    ".": "."
+}
+
+
