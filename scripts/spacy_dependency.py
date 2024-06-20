@@ -13,23 +13,29 @@ tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 #text = "(Read for Slate 's take on Jackson's findings.)"
 #text= "I'm upset that my walkman broke and now I have to turn the stereo up really loud."
 #text="my walkman broke so i'm ups_et now i have just to turn the stereo up real loud"
-
+#text="Even if they were in their ship, that is, rather than in this--this--_cage_.".lower()
 #text= "He actually feels _bad_ that we're leaving.".lower()
 #text= "Don't get too concerned if you seem to be following a very roundabout route."# [SEP] Do not be surprised if your route in not directly to your destination.".lower()
 
+
 def underscore_count(text):
-    
-    
     # Rimuovi qualsiasi sequenza di numeri
-    cleaned_text = re.sub(r'\d+', '', text)
+    #cleaned_text = re.sub(r'\d+', '', text)
     
-    # Conta il numero di underscore
-    underscore_count = cleaned_text.count('_')
-    return  underscore_count
+    # Trova tutte le sequenze di underscore
+    underscore_sequences = re.findall(r'_+', text)
+    
+    # Trova la lunghezza della sequenza più lunga
+    if underscore_sequences:
+        longest_sequence_length = max(len(seq) for seq in underscore_sequences)
+    else:
+        longest_sequence_length = 0
+    
+    return longest_sequence_length
 
 def spacy_dependency(text:str):
     #text = normalizzation(text)
-    #print(spacy_map(text))
+    #print(spacy_map_dict)
     #print('\n\n')
     sentence = nlp(text)
     tokens_children_dep = []
@@ -42,7 +48,7 @@ def spacy_dependency(text:str):
     #print(f"filtered_sentence: {filtered_sentence}")#debug
     #print(f"normal_sentence: {normal_sentence}")#debug
 
-    
+    spacy_map_dict = spacy_map(text)
     for index,token in enumerate(filtered_sentence):
         #for child in token.children:
             
@@ -50,11 +56,11 @@ def spacy_dependency(text:str):
         #print(f"token:{token}")#debug
         #print(type(token))
         #try:
-        #print(f"mapped_token: {spacy_map(text)[str(token)]}")
+        #print(f"mapped_token: {spacy_map_dict[str(token)]}")
         #print('\n')#debug
         new_list_token_idx.append(token.text.lower()+'____'+str(index + adjusted_index))
-        if isinstance(spacy_map(text)[str(token)], list):
-            for i, el in enumerate(spacy_map(text)[str(token)]):
+        if isinstance(spacy_map_dict[str(token)], list):
+            for i, el in enumerate(spacy_map_dict[str(token)]):
                 # Salta il primo sottotoken (ad es. "token") e i sottottoken che iniziano con "##"
                 if i == 0 or el[:2] == '##':
                     continue
@@ -110,6 +116,7 @@ def spacy_dependency(text:str):
 
 def create_dependency_pairs(text:str):
     #text = normalizzation(text)
+    spacy_map_dict = spacy_map(text)
     lista_dipendenze = spacy_dependency(text)
 
     lista_dipendenze_mappate = [] #secondo il tokenizer di bert
@@ -124,22 +131,27 @@ def create_dependency_pairs(text:str):
         #print('\n\n') #debug
         #print(tup[1].split('____')[1][:uc2-4])#debug
         if uc1>4:
-            print('underscore_count grateher than 4 for tup1')
-            spacy_mapping_first = spacy_map(text)[tup[0].split('____')[1][:uc1-4]]
-            #print(spacy_map(text)[tup[0].split('____')[1][:uc1-4]])
+            print('underscore_count grather than 4 for tup1')
+            spacy_mapping_first = spacy_map_dict[tup[0].split('____')[1][:uc1-4]]
+            print(spacy_mapping_first)
+            print(tup[0].split('____')[1])
+            #print(spacy_map_dict[tup[0].split('____')[1][:uc1-4]])
         else:
-            spacy_mapping_first = spacy_map(text)[tup[0].split('____')[0]]
-            #print(spacy_map(text)[tup[0].split('____')[0]])
+            spacy_mapping_first = spacy_map_dict[tup[0].split('____')[0]]
+            #print(spacy_map_dict[tup[0].split('____')[0]])
         if uc2>4:
-            print('underscore_count grateher than 4 for tup2')
-            spacy_mapping_second = spacy_map(text)[tup[1].split('____')[1][:uc2-4]]
-            #print(spacy_map(text)[tup[1].split('____')[1][:uc2-4]])
+            print('underscore_count grather than 4 for tup2')
+            spacy_mapping_second = spacy_map_dict[tup[1].split('____')[1][:uc2-4]]
+            print(spacy_mapping_second)
+            print(tup[1].split('____')[1])
+            
+            #print(spacy_map_dict[tup[1].split('____')[1][:uc2-4]])
         else:
-            spacy_mapping_second = spacy_map(text)[tup[1].split('____')[0]]
-            #print(spacy_map(text)[tup[1].split('____')[0]])
+            spacy_mapping_second = spacy_map_dict[tup[1].split('____')[0]]
+            #print(spacy_map_dict[tup[1].split('____')[0]])
         
-        #print(spacy_map(text)[tup[0].split('____')[0]])
-        #print(spacy_map(text)[tup[1].split('____')[0]])
+        #print(spacy_map_dict[tup[0].split('____')[0]])
+        #print(spacy_map_dict[tup[1].split('____')[0]])
             
         try:
             #suffix_f = int(tup[0].split('____')[1])
@@ -159,10 +171,10 @@ def create_dependency_pairs(text:str):
         # Controllo se entrambi i termini della tupla sono liste
         if isinstance(spacy_mapping_first, list) and isinstance(spacy_mapping_second, list):
             #print('1 caso') #debug
-            #print(spacy_map(text)[tup[0].split('____')[0]])#debug
-            #print(spacy_map(text)[tup[1].split('____')[0]])#debug
+            #print(spacy_map_dict[tup[0].split('____')[0]])#debug
+            #print(spacy_map_dict[tup[1].split('____')[0]])#debug
             # Aggiungi i suffissi appropriati a ogni elemento delle liste
-            #updated_left_list = [el + suffix_f for el in spacy_map(text)[tup[0]] if el[:2]=='##']
+            #updated_left_list = [el + suffix_f for el in spacy_map_dict[tup[0]] if el[:2]=='##']
             updated_left_list= []
             for index, el in enumerate(spacy_mapping_first): #se prendiamo il caso di [token,##izer] 
                 index_adjustment = 0
@@ -194,7 +206,7 @@ def create_dependency_pairs(text:str):
                         #caso in cui il secondo elemento non fa parte della stessa parola es in [',m] --> m 
 
             #print('\n')
-            #updated_right_list = [el + suffix_s for el in spacy_map(text)[tup[1]]]
+            #updated_right_list = [el + suffix_s for el in spacy_map_dict[tup[1]]]
             # Aggiungi le coppie di liste modificate alla lista delle dipendenze mappate
             lista_dipendenze_mappate.append((updated_left_list, updated_right_list))
             continue
@@ -217,7 +229,7 @@ def create_dependency_pairs(text:str):
                         updated_left_list.append(el +  '____'+str(suffix_f + index_adjustment))
             #print('\n')
         # Se il valore è una lista, aggiungi il suffisso a ogni elemento
-            #updated_left_list = [el + suffix_f for el in spacy_map(text)[tup[0]]]
+            #updated_left_list = [el + suffix_f for el in spacy_map_dict[tup[0]]]
 
             lista_dipendenze_mappate.append((updated_left_list,tup[1]))
             continue
@@ -240,7 +252,7 @@ def create_dependency_pairs(text:str):
                         index_adjustment += 1
                         updated_right_list.append(el +  '____'+str(suffix_s + index_adjustment))
             #print('\n')#debug
-            #updated_right_list = [el + suffix_s for el in spacy_map(text)[tup[1]]]
+            #updated_right_list = [el + suffix_s for el in spacy_map_dict[tup[1]]]
             lista_dipendenze_mappate.append((tup[0],updated_right_list))
             continue
   

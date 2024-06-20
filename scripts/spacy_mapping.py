@@ -2,14 +2,31 @@ import spacy
 #from transformers import BertTokenizer
 from transformers import AutoTokenizer
 from normalization import normalizzation
+import logging
+import json
+import os
+
 
 nlp = spacy.load("en_core_web_sm")
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+# Specifica il percorso del file di log
+log_path = os.path.join(os.getcwd(),'scripts','mask_generation')
+
+# Configura il logging per scrivere su un file di log con il percorso specificato
+logging.basicConfig(
+    level=logging.INFO,  # Livello di log: DEBUG, INFO, WARNING, ERROR, CRITICAL
+    format='%(asctime)s - %(levelname)s - %(message)s',  # Formato del log
+    filename='mask_generation.log',  # Nome del file di log
+    filemode='w'  # Modalità di apertura del file ('w' per scrivere, 'a' per aggiungere)
+)
+
 #text= "(Read  for Slate 's take on Jackson's findings.)"
 #text = "A BERT tokenizer uses something known BERT tokenizer which is BERT case sensitive"
 #text= "my walkman broke so i'm upset now i just have to turn the stereo up real loud"
 #text="Give Microsoft a monopoly on browsers, and you'll intensify the downward pressure on the price of its operating systems. [SEP] The downward pressure on the price of its operating systems will intensify if Microsoft is given a monopoly on browsers."
 #text= "Don't get too concerned if you seem to be following a very roundabout route".lower()
+#text ="they ain 't go outside".lower()
 
 def mapping (tokens_list:list, dict_to_update:dict):
     maps = {}
@@ -63,9 +80,17 @@ def spacy_map(text:str):
     #        print('Spacy found an empty token " " mapped to [] in Bert Tokenizer. It was removed for alignment purposes.')
 
     for k, v in final_map_dict.items():
-        if k != " " and isinstance(v,list) and len(v)==1:
-            print('Spacy found a token mapped in a differen way Bert Tokenizer. ')
-            print(k,v)
+        if k != " " and isinstance(v, list) and len(v) == 1:
+            logging.info('Spacy found a token mapped in a different way by Bert Tokenizer.')
+            logging.info(f'Key: {k}, Value: {v}')
+            # Convert the dictionary to a string
+            logging.info(f'Spacy token: {spacy_tokenizzation}')
+            logging.info(f'Bert token: {bert_tokenizzation}')
+            logging.info(f'tokens mismatch: {tokens_mismatch}')
+            final_map_str = json.dumps(final_map_dict, indent=4)
+            # Log the string representation of the dictionary
+            logging.info(final_map_str + '\n\n')
+            print('Check log')
 
     #if " " in final_map_dict and final_map_dict[" "] == []:
     #    del final_map_dict[" "]

@@ -71,7 +71,7 @@ def consistency_check(mask_before, mask_after):
         #print(f"Riga {i}: numero di 1 in mask_before = {count_before}, numero di 1 in mask_after = {count_after}")
         
         if count_before != count_after:
-            print(f"Incoerenza trovata nella riga {i}: numero di 1 non corrispondente")
+            print(f"Incoerenza trovata nella riga {i}: numero di celle attive non corrispondente")
             return False
 
     return True
@@ -159,6 +159,7 @@ class Dataset:
         gabriel_mask_class_processed,random_gabriel_mask_class_processed = process_mask(mask=mask,gabriel_mask=gabriel_mask_class,max_len=self.max_len)
         print(consistency_check(mask_before=gabriel_mask_class,mask_after=gabriel_mask_class_processed))
 
+
         gabriel_mask_mlm_processed,random_gabriel_mask_mlm_processed = process_mask(mask=mask,gabriel_mask=gabriel_mask_mlm,max_len=self.max_len)
         print(consistency_check(mask_before=gabriel_mask_mlm,mask_after=gabriel_mask_mlm_processed))
     
@@ -226,7 +227,8 @@ def main():
     dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
     #sliced_train_dataset = DatasetDict(dataset["train"][3952:3954])
     #sliced_train_dataset = DatasetDict(dataset["train"][3949:3954])
-    sliced_train_dataset = DatasetDict(dataset["train"][:100000])
+    sliced_train_dataset = DatasetDict(dataset["train"][12400:])
+    #sliced_train_dataset = DatasetDict(dataset["train"][20163:])
 
     #print(sliced_train_dataset)
 
@@ -250,6 +252,7 @@ def main():
 
     for bi, batch in tqdm(enumerate(train_data_loader), total=len(train_data_loader), desc='Loading:', disable=True):
         id = batch["id"][0].numpy()
+        print(id)
         """
         print('FOR CLASS TASK')
         print(id)
@@ -290,7 +293,7 @@ def main():
             random_gabriel_mask_mlm =  batch["random_gabriel_mask_mlm"]
             np.save(os.path.join(rgm_mlm_dir,f'rgm_{id}.npy'), random_gabriel_mask_mlm)
 
-
+        
         progress_bar.update(1)
         
 if __name__ =='__main__':
