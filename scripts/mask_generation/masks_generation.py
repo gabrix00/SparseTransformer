@@ -227,8 +227,8 @@ def main():
     dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
     #sliced_train_dataset = DatasetDict(dataset["train"][3952:3954])
     #sliced_train_dataset = DatasetDict(dataset["train"][3949:3954])
-    sliced_train_dataset = DatasetDict(dataset["train"][12400:])
-    #sliced_train_dataset = DatasetDict(dataset["train"][20163:])
+    #sliced_train_dataset = DatasetDict(dataset["train"][12400:])
+    sliced_train_dataset = DatasetDict(dataset["train"][:200000])
 
     #print(sliced_train_dataset)
 
