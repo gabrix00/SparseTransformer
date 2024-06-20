@@ -8344,3 +8344,365 @@
 }
 
 
+2024-06-20 19:44:21,516 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:44:21,516 - INFO - Key: t, Value: ['t']
+2024-06-20 19:44:21,516 - INFO - Spacy token: ['environmental', 'observations', 'on', 'elevating', 'the', 'epa', 'to', 'cabinet', 'status', ',', 'march', '21', ',', '2002', '(', 'gao-02', '-', '552', 't', ')', '.']
+2024-06-20 19:44:21,516 - INFO - Bert token: ['environmental', 'observations', 'on', 'el', '##eva', '##ting', 'the', 'epa', 'to', 'cabinet', 'status', ',', 'march', '21', ',', '2002', '(', 'gao', '-', '02', '-', '55', '##2', '##t', ')', '.']
+2024-06-20 19:44:21,516 - INFO - tokens mismatch: ['elevating', 'gao-02', '552', 't']
+2024-06-20 19:44:21,516 - INFO - {
+    "environmental": "environmental",
+    "observations": "observations",
+    "on": "on",
+    "elevating": [
+        "el",
+        "##eva",
+        "##ting"
+    ],
+    "the": "the",
+    "epa": "epa",
+    "to": "to",
+    "cabinet": "cabinet",
+    "status": "status",
+    ",": ",",
+    "march": "march",
+    "21": "21",
+    "2002": "2002",
+    "(": "(",
+    "gao-02": [
+        "gao",
+        "-",
+        "02"
+    ],
+    "-": "-",
+    "552": [
+        "55",
+        "##2"
+    ],
+    "t": [
+        "t"
+    ],
+    ")": ")",
+    ".": "."
+}
+
+
+2024-06-20 19:44:21,527 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:44:21,527 - INFO - Key: t, Value: ['t']
+2024-06-20 19:44:21,527 - INFO - Spacy token: ['environmental', 'observations', 'on', 'elevating', 'the', 'epa', 'to', 'cabinet', 'status', ',', 'march', '21', ',', '2002', '(', 'gao-02', '-', '552', 't', ')', '.']
+2024-06-20 19:44:21,528 - INFO - Bert token: ['environmental', 'observations', 'on', 'el', '##eva', '##ting', 'the', 'epa', 'to', 'cabinet', 'status', ',', 'march', '21', ',', '2002', '(', 'gao', '-', '02', '-', '55', '##2', '##t', ')', '.']
+2024-06-20 19:44:21,528 - INFO - tokens mismatch: ['elevating', 'gao-02', '552', 't']
+2024-06-20 19:44:21,528 - INFO - {
+    "environmental": "environmental",
+    "observations": "observations",
+    "on": "on",
+    "elevating": [
+        "el",
+        "##eva",
+        "##ting"
+    ],
+    "the": "the",
+    "epa": "epa",
+    "to": "to",
+    "cabinet": "cabinet",
+    "status": "status",
+    ",": ",",
+    "march": "march",
+    "21": "21",
+    "2002": "2002",
+    "(": "(",
+    "gao-02": [
+        "gao",
+        "-",
+        "02"
+    ],
+    "-": "-",
+    "552": [
+        "55",
+        "##2"
+    ],
+    "t": [
+        "t"
+    ],
+    ")": ")",
+    ".": "."
+}
+
+
+2024-06-20 19:44:44,884 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:44:44,885 - INFO - Key: na, Value: ['na']
+2024-06-20 19:44:44,885 - INFO - Spacy token: ['they', 'do', 'not', 'think', 'about', 'what', "'s", 'gon', 'na', 'happen', 'after', 'doing', 'these', 'horrible', 'crimes', '.']
+2024-06-20 19:44:44,885 - INFO - Bert token: ['they', 'do', 'not', 'think', 'about', 'what', "'", 's', 'gonna', 'happen', 'after', 'doing', 'these', 'horrible', 'crimes', '.']
+2024-06-20 19:44:44,885 - INFO - tokens mismatch: ["'s", 'gon', 'na']
+2024-06-20 19:44:44,885 - INFO - {
+    "they": "they",
+    "do": "do",
+    "not": "not",
+    "think": "think",
+    "about": "about",
+    "what": "what",
+    "'s": [
+        "'",
+        "s"
+    ],
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "happen": "happen",
+    "after": "after",
+    "doing": "doing",
+    "these": "these",
+    "horrible": "horrible",
+    "crimes": "crimes",
+    ".": "."
+}
+
+
+2024-06-20 19:44:44,894 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:44:44,894 - INFO - Key: na, Value: ['na']
+2024-06-20 19:44:44,894 - INFO - Spacy token: ['they', 'do', 'not', 'think', 'about', 'what', "'s", 'gon', 'na', 'happen', 'after', 'doing', 'these', 'horrible', 'crimes', '.']
+2024-06-20 19:44:44,894 - INFO - Bert token: ['they', 'do', 'not', 'think', 'about', 'what', "'", 's', 'gonna', 'happen', 'after', 'doing', 'these', 'horrible', 'crimes', '.']
+2024-06-20 19:44:44,894 - INFO - tokens mismatch: ["'s", 'gon', 'na']
+2024-06-20 19:44:44,894 - INFO - {
+    "they": "they",
+    "do": "do",
+    "not": "not",
+    "think": "think",
+    "about": "about",
+    "what": "what",
+    "'s": [
+        "'",
+        "s"
+    ],
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "happen": "happen",
+    "after": "after",
+    "doing": "doing",
+    "these": "these",
+    "horrible": "horrible",
+    "crimes": "crimes",
+    ".": "."
+}
+
+
+2024-06-20 19:45:08,306 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:45:08,306 - INFO - Key: na, Value: ['na']
+2024-06-20 19:45:08,306 - INFO - Spacy token: ['well', 'they', "'re", 'gon', 'na', 'beep', 'us', 'pretty', 'soon']
+2024-06-20 19:45:08,306 - INFO - Bert token: ['well', 'they', "'", 're', 'gonna', 'bee', '##p', 'us', 'pretty', 'soon']
+2024-06-20 19:45:08,306 - INFO - tokens mismatch: ["'re", 'gon', 'na', 'beep']
+2024-06-20 19:45:08,306 - INFO - {
+    "well": "well",
+    "they": "they",
+    "'re": [
+        "'",
+        "re"
+    ],
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "beep": [
+        "bee",
+        "##p"
+    ],
+    "us": "us",
+    "pretty": "pretty",
+    "soon": "soon"
+}
+
+
+2024-06-20 19:45:08,314 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:45:08,314 - INFO - Key: na, Value: ['na']
+2024-06-20 19:45:08,314 - INFO - Spacy token: ['well', 'they', "'re", 'gon', 'na', 'beep', 'us', 'pretty', 'soon']
+2024-06-20 19:45:08,314 - INFO - Bert token: ['well', 'they', "'", 're', 'gonna', 'bee', '##p', 'us', 'pretty', 'soon']
+2024-06-20 19:45:08,314 - INFO - tokens mismatch: ["'re", 'gon', 'na', 'beep']
+2024-06-20 19:45:08,314 - INFO - {
+    "well": "well",
+    "they": "they",
+    "'re": [
+        "'",
+        "re"
+    ],
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "beep": [
+        "bee",
+        "##p"
+    ],
+    "us": "us",
+    "pretty": "pretty",
+    "soon": "soon"
+}
+
+
+2024-06-20 19:45:12,810 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:45:12,810 - INFO - Key: sí, Value: ['si']
+2024-06-20 19:45:12,810 - INFO - Spacy token: [' ', 'sí', ',', 'that', 'was', 'a', 'great', 'pity', ',', 'don', 'cazar', '.']
+2024-06-20 19:45:12,810 - INFO - Bert token: ['si', ',', 'that', 'was', 'a', 'great', 'pity', ',', 'don', 'ca', '##zar', '.']
+2024-06-20 19:45:12,810 - INFO - tokens mismatch: [' ', 'sí', 'cazar']
+2024-06-20 19:45:12,810 - INFO - {
+    " ": [],
+    "s\u00ed": [
+        "si"
+    ],
+    ",": ",",
+    "that": "that",
+    "was": "was",
+    "a": "a",
+    "great": "great",
+    "pity": "pity",
+    "don": "don",
+    "cazar": [
+        "ca",
+        "##zar"
+    ],
+    ".": "."
+}
+
+
+2024-06-20 19:45:12,819 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:45:12,819 - INFO - Key: sí, Value: ['si']
+2024-06-20 19:45:12,819 - INFO - Spacy token: [' ', 'sí', ',', 'that', 'was', 'a', 'great', 'pity', ',', 'don', 'cazar', '.']
+2024-06-20 19:45:12,819 - INFO - Bert token: ['si', ',', 'that', 'was', 'a', 'great', 'pity', ',', 'don', 'ca', '##zar', '.']
+2024-06-20 19:45:12,819 - INFO - tokens mismatch: [' ', 'sí', 'cazar']
+2024-06-20 19:45:12,819 - INFO - {
+    " ": [],
+    "s\u00ed": [
+        "si"
+    ],
+    ",": ",",
+    "that": "that",
+    "was": "was",
+    "a": "a",
+    "great": "great",
+    "pity": "pity",
+    "don": "don",
+    "cazar": [
+        "ca",
+        "##zar"
+    ],
+    ".": "."
+}
+
+
+2024-06-20 19:45:43,337 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:45:43,338 - INFO - Key: pm, Value: ['pm']
+2024-06-20 19:45:43,338 - INFO - Spacy token: ['most', 'stores', 'are', 'open', 'from', '9:00am', 'to', '1', 'or', '1:30pm', ',', 'closing', 'midday', 'for', 'lunch', 'and', 'siesta', ',', 'and', 'again', 'from', '4:30', 'or', '5', 'to', '8', 'pm', '.']
+2024-06-20 19:45:43,338 - INFO - Bert token: ['most', 'stores', 'are', 'open', 'from', '9', ':', '00', '##am', 'to', '1', 'or', '1', ':', '30', '##pm', ',', 'closing', 'midday', 'for', 'lunch', 'and', 'si', '##est', '##a', ',', 'and', 'again', 'from', '4', ':', '30', 'or', '5', 'to', '8', '##pm', '.']
+2024-06-20 19:45:43,338 - INFO - tokens mismatch: ['9:00am', '1:30pm', 'siesta', '4:30', 'pm']
+2024-06-20 19:45:43,338 - INFO - {
+    "most": "most",
+    "stores": "stores",
+    "are": "are",
+    "open": "open",
+    "from": "from",
+    "9:00am": [
+        "9",
+        ":",
+        "00",
+        "##am"
+    ],
+    "to": "to",
+    "1": "1",
+    "or": "or",
+    "1:30pm": [
+        "1",
+        ":",
+        "30",
+        "##pm"
+    ],
+    ",": ",",
+    "closing": "closing",
+    "midday": "midday",
+    "for": "for",
+    "lunch": "lunch",
+    "and": "and",
+    "siesta": [
+        "si",
+        "##est",
+        "##a"
+    ],
+    "again": "again",
+    "4:30": [
+        "4",
+        ":",
+        "30"
+    ],
+    "5": "5",
+    "8": "8",
+    "pm": [
+        "pm"
+    ],
+    ".": "."
+}
+
+
+2024-06-20 19:45:43,351 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:45:43,351 - INFO - Key: pm, Value: ['pm']
+2024-06-20 19:45:43,351 - INFO - Spacy token: ['most', 'stores', 'are', 'open', 'from', '9:00am', 'to', '1', 'or', '1:30pm', ',', 'closing', 'midday', 'for', 'lunch', 'and', 'siesta', ',', 'and', 'again', 'from', '4:30', 'or', '5', 'to', '8', 'pm', '.']
+2024-06-20 19:45:43,351 - INFO - Bert token: ['most', 'stores', 'are', 'open', 'from', '9', ':', '00', '##am', 'to', '1', 'or', '1', ':', '30', '##pm', ',', 'closing', 'midday', 'for', 'lunch', 'and', 'si', '##est', '##a', ',', 'and', 'again', 'from', '4', ':', '30', 'or', '5', 'to', '8', '##pm', '.']
+2024-06-20 19:45:43,351 - INFO - tokens mismatch: ['9:00am', '1:30pm', 'siesta', '4:30', 'pm']
+2024-06-20 19:45:43,351 - INFO - {
+    "most": "most",
+    "stores": "stores",
+    "are": "are",
+    "open": "open",
+    "from": "from",
+    "9:00am": [
+        "9",
+        ":",
+        "00",
+        "##am"
+    ],
+    "to": "to",
+    "1": "1",
+    "or": "or",
+    "1:30pm": [
+        "1",
+        ":",
+        "30",
+        "##pm"
+    ],
+    ",": ",",
+    "closing": "closing",
+    "midday": "midday",
+    "for": "for",
+    "lunch": "lunch",
+    "and": "and",
+    "siesta": [
+        "si",
+        "##est",
+        "##a"
+    ],
+    "again": "again",
+    "4:30": [
+        "4",
+        ":",
+        "30"
+    ],
+    "5": "5",
+    "8": "8",
+    "pm": [
+        "pm"
+    ],
+    ".": "."
+}
+
+
