@@ -8706,3 +8706,483 @@
 }
 
 
+2024-06-20 19:47:01,352 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,352 - INFO - Key: i, Value: ['i']
+2024-06-20 19:47:01,352 - INFO - Spacy token: ['who', "'s", 'that', '?', 'jonofi', '(', 'name', 'on', 'i', 'd', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,352 - INFO - Bert token: ['who', "'", 's', 'that', '?', 'jon', '##of', '##i', '(', 'name', 'on', 'id', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,352 - INFO - tokens mismatch: ["'s", 'jonofi', 'i', 'd']
+2024-06-20 19:47:01,353 - INFO - {
+    "who": "who",
+    "'s": [
+        "'",
+        "s"
+    ],
+    "that": "that",
+    "?": "?",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "(": "(",
+    "name": "name",
+    "on": "on",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    ":": ":",
+    "john": "john",
+    ")": ")",
+    "asked": "asked",
+    ".": "."
+}
+
+
+2024-06-20 19:47:01,353 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,353 - INFO - Key: d, Value: ['d']
+2024-06-20 19:47:01,353 - INFO - Spacy token: ['who', "'s", 'that', '?', 'jonofi', '(', 'name', 'on', 'i', 'd', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,353 - INFO - Bert token: ['who', "'", 's', 'that', '?', 'jon', '##of', '##i', '(', 'name', 'on', 'id', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,353 - INFO - tokens mismatch: ["'s", 'jonofi', 'i', 'd']
+2024-06-20 19:47:01,353 - INFO - {
+    "who": "who",
+    "'s": [
+        "'",
+        "s"
+    ],
+    "that": "that",
+    "?": "?",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "(": "(",
+    "name": "name",
+    "on": "on",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    ":": ":",
+    "john": "john",
+    ")": ")",
+    "asked": "asked",
+    ".": "."
+}
+
+
+2024-06-20 19:47:01,363 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,363 - INFO - Key: i, Value: ['i']
+2024-06-20 19:47:01,363 - INFO - Spacy token: ['who', "'s", 'that', '?', 'jonofi', '(', 'name', 'on', 'i', 'd', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,363 - INFO - Bert token: ['who', "'", 's', 'that', '?', 'jon', '##of', '##i', '(', 'name', 'on', 'id', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,363 - INFO - tokens mismatch: ["'s", 'jonofi', 'i', 'd']
+2024-06-20 19:47:01,363 - INFO - {
+    "who": "who",
+    "'s": [
+        "'",
+        "s"
+    ],
+    "that": "that",
+    "?": "?",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "(": "(",
+    "name": "name",
+    "on": "on",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    ":": ":",
+    "john": "john",
+    ")": ")",
+    "asked": "asked",
+    ".": "."
+}
+
+
+2024-06-20 19:47:01,363 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,363 - INFO - Key: d, Value: ['d']
+2024-06-20 19:47:01,363 - INFO - Spacy token: ['who', "'s", 'that', '?', 'jonofi', '(', 'name', 'on', 'i', 'd', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,363 - INFO - Bert token: ['who', "'", 's', 'that', '?', 'jon', '##of', '##i', '(', 'name', 'on', 'id', ':', 'john', ')', 'asked', '.']
+2024-06-20 19:47:01,363 - INFO - tokens mismatch: ["'s", 'jonofi', 'i', 'd']
+2024-06-20 19:47:01,363 - INFO - {
+    "who": "who",
+    "'s": [
+        "'",
+        "s"
+    ],
+    "that": "that",
+    "?": "?",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "(": "(",
+    "name": "name",
+    "on": "on",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    ":": ":",
+    "john": "john",
+    ")": ")",
+    "asked": "asked",
+    ".": "."
+}
+
+
+2024-06-20 19:47:01,368 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,368 - INFO - Key: i, Value: ['i']
+2024-06-20 19:47:01,368 - INFO - Spacy token: ['john', ',', 'whose', 'i', 'd', 'said', 'jonofi', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,368 - INFO - Bert token: ['john', ',', 'whose', 'id', 'said', 'jon', '##of', '##i', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,368 - INFO - tokens mismatch: ['i', 'd', 'jonofi']
+2024-06-20 19:47:01,368 - INFO - {
+    "john": "john",
+    ",": ",",
+    "whose": "whose",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    "said": "said",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "asked": "asked",
+    "who": "who",
+    "it": "it",
+    "was": "was",
+    ".": "."
+}
+
+
+2024-06-20 19:47:01,368 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,368 - INFO - Key: d, Value: ['d']
+2024-06-20 19:47:01,368 - INFO - Spacy token: ['john', ',', 'whose', 'i', 'd', 'said', 'jonofi', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,368 - INFO - Bert token: ['john', ',', 'whose', 'id', 'said', 'jon', '##of', '##i', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,368 - INFO - tokens mismatch: ['i', 'd', 'jonofi']
+2024-06-20 19:47:01,368 - INFO - {
+    "john": "john",
+    ",": ",",
+    "whose": "whose",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    "said": "said",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "asked": "asked",
+    "who": "who",
+    "it": "it",
+    "was": "was",
+    ".": "."
+}
+
+
+2024-06-20 19:47:01,377 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,378 - INFO - Key: i, Value: ['i']
+2024-06-20 19:47:01,378 - INFO - Spacy token: ['john', ',', 'whose', 'i', 'd', 'said', 'jonofi', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,378 - INFO - Bert token: ['john', ',', 'whose', 'id', 'said', 'jon', '##of', '##i', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,378 - INFO - tokens mismatch: ['i', 'd', 'jonofi']
+2024-06-20 19:47:01,378 - INFO - {
+    "john": "john",
+    ",": ",",
+    "whose": "whose",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    "said": "said",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "asked": "asked",
+    "who": "who",
+    "it": "it",
+    "was": "was",
+    ".": "."
+}
+
+
+2024-06-20 19:47:01,378 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:01,378 - INFO - Key: d, Value: ['d']
+2024-06-20 19:47:01,378 - INFO - Spacy token: ['john', ',', 'whose', 'i', 'd', 'said', 'jonofi', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,378 - INFO - Bert token: ['john', ',', 'whose', 'id', 'said', 'jon', '##of', '##i', ',', 'asked', 'who', 'it', 'was', '.']
+2024-06-20 19:47:01,378 - INFO - tokens mismatch: ['i', 'd', 'jonofi']
+2024-06-20 19:47:01,378 - INFO - {
+    "john": "john",
+    ",": ",",
+    "whose": "whose",
+    "i": [
+        "i"
+    ],
+    "d": [
+        "d"
+    ],
+    "said": "said",
+    "jonofi": [
+        "jon",
+        "##of",
+        "##i"
+    ],
+    "asked": "asked",
+    "who": "who",
+    "it": "it",
+    "was": "was",
+    ".": "."
+}
+
+
+2024-06-20 19:47:50,302 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:50,303 - INFO - Key: na, Value: ['na']
+2024-06-20 19:47:50,303 - INFO - Spacy token: ['gon', 'na', 'stomp', 'all', 'over', 'any', 'blue', 'bellies', 'as', 'comes', 'into', 'this', 'town', '?']
+2024-06-20 19:47:50,303 - INFO - Bert token: ['gonna', 'st', '##omp', 'all', 'over', 'any', 'blue', 'bell', '##ies', 'as', 'comes', 'into', 'this', 'town', '?']
+2024-06-20 19:47:50,303 - INFO - tokens mismatch: ['gon', 'na', 'stomp', 'bellies']
+2024-06-20 19:47:50,303 - INFO - {
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "stomp": [
+        "st",
+        "##omp"
+    ],
+    "all": "all",
+    "over": "over",
+    "any": "any",
+    "blue": "blue",
+    "bellies": [
+        "bell",
+        "##ies"
+    ],
+    "as": "as",
+    "comes": "comes",
+    "into": "into",
+    "this": "this",
+    "town": "town",
+    "?": "?"
+}
+
+
+2024-06-20 19:47:50,312 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:50,312 - INFO - Key: na, Value: ['na']
+2024-06-20 19:47:50,312 - INFO - Spacy token: ['gon', 'na', 'stomp', 'all', 'over', 'any', 'blue', 'bellies', 'as', 'comes', 'into', 'this', 'town', '?']
+2024-06-20 19:47:50,312 - INFO - Bert token: ['gonna', 'st', '##omp', 'all', 'over', 'any', 'blue', 'bell', '##ies', 'as', 'comes', 'into', 'this', 'town', '?']
+2024-06-20 19:47:50,312 - INFO - tokens mismatch: ['gon', 'na', 'stomp', 'bellies']
+2024-06-20 19:47:50,312 - INFO - {
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "stomp": [
+        "st",
+        "##omp"
+    ],
+    "all": "all",
+    "over": "over",
+    "any": "any",
+    "blue": "blue",
+    "bellies": [
+        "bell",
+        "##ies"
+    ],
+    "as": "as",
+    "comes": "comes",
+    "into": "into",
+    "this": "this",
+    "town": "town",
+    "?": "?"
+}
+
+
+2024-06-20 19:47:52,877 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:52,877 - INFO - Key: na, Value: ['na']
+2024-06-20 19:47:52,877 - INFO - Spacy token: ['gon', 'na', 'take', 'th', "'", 'yankees', 'some', "doin'", 'to', 'git', 'all', 'them', 'back', 'into', 'place', '.', '"he', 'laughed', '.']
+2024-06-20 19:47:52,877 - INFO - Bert token: ['gonna', 'take', 'th', "'", 'yankees', 'some', 'doin', "'", 'to', 'gi', '##t', 'all', 'them', 'back', 'into', 'place', '.', '"', 'he', 'laughed', '.']
+2024-06-20 19:47:52,877 - INFO - tokens mismatch: ['gon', 'na', "doin'", 'git', '"he']
+2024-06-20 19:47:52,877 - INFO - {
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "take": "take",
+    "th": "th",
+    "'": "'",
+    "yankees": "yankees",
+    "some": "some",
+    "doin'": [
+        "doin",
+        "'"
+    ],
+    "to": "to",
+    "git": [
+        "gi",
+        "##t"
+    ],
+    "all": "all",
+    "them": "them",
+    "back": "back",
+    "into": "into",
+    "place": "place",
+    ".": ".",
+    "\"he": [
+        "\"",
+        "he"
+    ],
+    "laughed": "laughed"
+}
+
+
+2024-06-20 19:47:52,887 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:47:52,887 - INFO - Key: na, Value: ['na']
+2024-06-20 19:47:52,887 - INFO - Spacy token: ['gon', 'na', 'take', 'th', "'", 'yankees', 'some', "doin'", 'to', 'git', 'all', 'them', 'back', 'into', 'place', '.', '"he', 'laughed', '.']
+2024-06-20 19:47:52,887 - INFO - Bert token: ['gonna', 'take', 'th', "'", 'yankees', 'some', 'doin', "'", 'to', 'gi', '##t', 'all', 'them', 'back', 'into', 'place', '.', '"', 'he', 'laughed', '.']
+2024-06-20 19:47:52,887 - INFO - tokens mismatch: ['gon', 'na', "doin'", 'git', '"he']
+2024-06-20 19:47:52,887 - INFO - {
+    "gon": [
+        "go",
+        "##n"
+    ],
+    "na": [
+        "na"
+    ],
+    "take": "take",
+    "th": "th",
+    "'": "'",
+    "yankees": "yankees",
+    "some": "some",
+    "doin'": [
+        "doin",
+        "'"
+    ],
+    "to": "to",
+    "git": [
+        "gi",
+        "##t"
+    ],
+    "all": "all",
+    "them": "them",
+    "back": "back",
+    "into": "into",
+    "place": "place",
+    ".": ".",
+    "\"he": [
+        "\"",
+        "he"
+    ],
+    "laughed": "laughed"
+}
+
+
+2024-06-20 19:48:39,982 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:48:39,983 - INFO - Key: s, Value: ['s']
+2024-06-20 19:48:39,983 - INFO - Spacy token: ['well', 'that', 's', 'not', 'chutzpah', 'at', 'all', 'i', 'think', ',', 'given', 'who', 'the', 'beneficiary', 'was', '.']
+2024-06-20 19:48:39,983 - INFO - Bert token: ['well', 'that', '##s', 'not', 'chu', '##tz', '##pa', '##h', 'at', 'all', 'i', 'think', ',', 'given', 'who', 'the', 'ben', '##ef', '##icia', '##ry', 'was', '.']
+2024-06-20 19:48:39,983 - INFO - tokens mismatch: ['s', 'chutzpah', 'beneficiary']
+2024-06-20 19:48:39,983 - INFO - {
+    "well": "well",
+    "that": "that",
+    "s": [
+        "s"
+    ],
+    "not": "not",
+    "chutzpah": [
+        "chu",
+        "##tz",
+        "##pa",
+        "##h"
+    ],
+    "at": "at",
+    "all": "all",
+    "i": "i",
+    "think": "think",
+    ",": ",",
+    "given": "given",
+    "who": "who",
+    "the": "the",
+    "beneficiary": [
+        "ben",
+        "##ef",
+        "##icia",
+        "##ry"
+    ],
+    "was": "was",
+    ".": "."
+}
+
+
+2024-06-20 19:48:39,993 - INFO - Spacy found a token mapped in a different way by Bert Tokenizer.
+2024-06-20 19:48:39,993 - INFO - Key: s, Value: ['s']
+2024-06-20 19:48:39,993 - INFO - Spacy token: ['well', 'that', 's', 'not', 'chutzpah', 'at', 'all', 'i', 'think', ',', 'given', 'who', 'the', 'beneficiary', 'was', '.']
+2024-06-20 19:48:39,993 - INFO - Bert token: ['well', 'that', '##s', 'not', 'chu', '##tz', '##pa', '##h', 'at', 'all', 'i', 'think', ',', 'given', 'who', 'the', 'ben', '##ef', '##icia', '##ry', 'was', '.']
+2024-06-20 19:48:39,993 - INFO - tokens mismatch: ['s', 'chutzpah', 'beneficiary']
+2024-06-20 19:48:39,993 - INFO - {
+    "well": "well",
+    "that": "that",
+    "s": [
+        "s"
+    ],
+    "not": "not",
+    "chutzpah": [
+        "chu",
+        "##tz",
+        "##pa",
+        "##h"
+    ],
+    "at": "at",
+    "all": "all",
+    "i": "i",
+    "think": "think",
+    ",": ",",
+    "given": "given",
+    "who": "who",
+    "the": "the",
+    "beneficiary": [
+        "ben",
+        "##ef",
+        "##icia",
+        "##ry"
+    ],
+    "was": "was",
+    ".": "."
+}
+
+
