@@ -228,7 +228,7 @@ def main():
     #sliced_train_dataset = DatasetDict(dataset["train"][3952:3954])
     #sliced_train_dataset = DatasetDict(dataset["train"][3949:3954])
     #sliced_train_dataset = DatasetDict(dataset["train"][12400:])
-    sliced_train_dataset = DatasetDict(dataset["train"][:200000])
+    sliced_train_dataset = DatasetDict(dataset["train"][:100000])
 
     #print(sliced_train_dataset)
 
@@ -272,7 +272,7 @@ def main():
         if f'gm_{id}.npy' not in os.listdir(gm_class_dir):
             gabriel_mask_class = batch["gabriel_mask_class"]
             np.save(os.path.join(gm_class_dir, f'gm_{id}.npy'), gabriel_mask_class)
-            with open(os.path.join(text_class_dir, f'gm_{id}.txt'), 'w') as f:
+            with open(os.path.join(text_class_dir, f'gm_{id}.txt'), 'w', encoding='utf-8') as f:
                 f.write(f"text_concat: {batch['text_concat'][0]}\npercentage of attention: {batch['attention_gm_class'][0]}")
 
         
@@ -285,7 +285,7 @@ def main():
         if f'gm_{id}.npy' not in os.listdir(gm_mlm_dir):
             gabriel_mask_mlm = batch["gabriel_mask_mlm"]
             np.save(os.path.join(gm_mlm_dir, f'gm_{id}.npy'), gabriel_mask_mlm)
-            with open(os.path.join(text_mlm_dir, f'gm_{id}.txt'), 'w') as f:
+            with open(os.path.join(text_mlm_dir, f'gm_{id}.txt'), 'w', encoding='utf-8') as f:
                 f.write(f"premise: {batch['text_a'][0]}\npercentage of attention: {batch['attention_gm_mlm'][0]}")
 
         
