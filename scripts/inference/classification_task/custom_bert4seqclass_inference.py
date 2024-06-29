@@ -456,12 +456,12 @@ class Dataset:
         gabriel_mask_path = os.path.join('experiments/validation/class_task/gabriel_mask', f'gm_{id}.npy') 
         try:
             gabriel_mask = np.load(gabriel_mask_path)
+            
             print(f'gm_{id}.npy founded!')
         except:
             print(f'gm_{id}.npy NOT founded!')
             gm_class,_ = mask_multiple_sentences(text_a,text_b)
             #rmasking(text=text_concat,rand_mask=gm_class,viz=True)
-
             gabriel_mask,_ = process_mask(mask=mask,gabriel_mask=gm_class,max_len=self.max_len)
             print(f'gm_{id}.npy generated!')
             
@@ -474,7 +474,7 @@ class Dataset:
             "gabriel_mask": torch.tensor(gabriel_mask, dtype=torch.long),
         }
     
-###------------- fino a qui è il codice di custom_bert4seqclass_finetuning
+
 
 def main(checkpoint_path = None):
     
@@ -496,7 +496,7 @@ def main(checkpoint_path = None):
     pretrained_model = "bert-base-uncased"
 
     model_name = pretrained_model + "_" + task + "_" + dataset_name + "_" + pst_now.strftime("%Y-%m-%d_%H-%M-%S")
-    saved_model_dir = os.path.join(os.getcwd(),'results_Kaggle', model_name)
+    saved_model_dir = os.path.join(os.getcwd(),'results_test', model_name)
     os.makedirs(saved_model_dir, exist_ok=True)
 
    
@@ -511,18 +511,21 @@ def main(checkpoint_path = None):
     
     num_labels = 3   
     
+    
     model = CustomformerForSequenceClassification.from_pretrained(pretrained_model,
                                                           num_labels=num_labels,  # MNLI has 3 labels: 'entailment', 'neutral', 'contradiction'
                                                           problem_type="multi_label_classification",
                                                           ignore_mismatched_sizes=True)
 
-    
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     if checkpoint_path:
-        checkpoint = torch.load(checkpoint_path)
+        checkpoint = torch.load(checkpoint_path,map_location=torch.device(device))
         model.load_state_dict(checkpoint['model_state_dict'])
+        print('model loaded succesfully')
     
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
     model.to(device)
 
     tokenizer = AutoTokenizer.from_pretrained(pretrained_model)
@@ -569,8 +572,8 @@ def main(checkpoint_path = None):
         # Append results to lists
         text_analyzed_list.extend(batch['text_concat'])
         loss_list.append(loss.item())
-        pred_list.extend([pred_class])
-        labels_list.extend(batch['label'][0])
+        pred_list.append(pred_class.item())
+        labels_list.append(batch['label'].item())
         
         progress_bar.update(1)
 
@@ -586,4 +589,5 @@ def main(checkpoint_path = None):
     result.to_csv(os.path.join(saved_model_dir, 'results_dataset_mnli_custom_bert4seqclass.csv'), index=False)
 
 if __name__ == '__main__':
-    main()
+    checkpoint_path = '/Users/gabrieletuccio/Developer/GitHub/SparseTransformer/finetuned_model/custom_bert4seqclass_finetuning_results/checkpoint.pt'
+    main(checkpoint_path=checkpoint_path)
