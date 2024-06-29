@@ -71,7 +71,7 @@ def main(checkpoint_path = None):
     pretrained_model = "bert-base-uncased"
 
     model_name = pretrained_model + "_" + task + "_" + dataset_name + "_" + pst_now.strftime("%Y-%m-%d_%H-%M-%S")
-    saved_model_dir = os.path.join(os.getcwd(),'results_Kaggle', model_name)
+    saved_model_dir = os.path.join(os.getcwd(),'results_test', model_name)
     os.makedirs(saved_model_dir, exist_ok=True)
 
    
@@ -91,13 +91,15 @@ def main(checkpoint_path = None):
                                                           problem_type="multi_label_classification",
                                                           ignore_mismatched_sizes=True)
 
-    
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     if checkpoint_path:
-        checkpoint = torch.load(checkpoint_path)
+        checkpoint = torch.load(checkpoint_path, map_location=torch.device(device))
         model.load_state_dict(checkpoint['model_state_dict'])
+        print('model loaded succesfully')
     
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
     model.to(device)
 
     tokenizer = AutoTokenizer.from_pretrained(pretrained_model)
@@ -128,13 +130,12 @@ def main(checkpoint_path = None):
     for bi, batch in enumerate(test_data_loader):
         ids = batch["ids"].to(device)
         mask = batch["mask"].to(device)
-        gabriel_mask = batch["gabriel_mask"].to(device)
         labels = batch['label'].to(device)
 
         labels_one_hot = torch.nn.functional.one_hot(labels, num_classes=num_labels).float().to(device)
 
         with torch.no_grad():
-            output = model(input_ids=ids, attention_mask=mask, gabriel_mask=gabriel_mask, labels=labels_one_hot)
+            output = model(input_ids=ids, attention_mask=mask, labels=labels_one_hot)
 
         loss = output.loss 
 
@@ -144,10 +145,11 @@ def main(checkpoint_path = None):
         # Append results to lists
         text_analyzed_list.extend(batch['text_concat'])
         loss_list.append(loss.item())
-        pred_list.extend([pred_class])
-        labels_list.extend(batch['label'][0])
+        pred_list.append(pred_class.item())
+        labels_list.append(batch['label'].item())
         
         progress_bar.update(1)
+        
 
 
         # Save results to a CSV file
@@ -161,5 +163,5 @@ def main(checkpoint_path = None):
     result.to_csv(os.path.join(saved_model_dir, 'results_dataset_mnli_bert4seqclass.csv'), index=False)
 
 if __name__ == '__main__':
-    checkpoint_path =  '/Users/gabrieletuccio/Developer/GitHub/SparseTransformer/results_Kaggle/bert4seqclass_finetuning_results/checkpoint.pt'
-    main()
+    checkpoint_path = '/Users/gabrieletuccio/Developer/GitHub/SparseTransformer/finetuned_model/bert4seqclass_finetuning_results/checkpoint.pt'
+    main(checkpoint_path=checkpoint_path)
