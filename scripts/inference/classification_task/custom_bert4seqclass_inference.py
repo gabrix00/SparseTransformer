@@ -583,7 +583,7 @@ def main(checkpoint_path = None):
     'loss': loss_list,
     })
     
-    result.to_csv(os.path.join(saved_model_dir, 'results_dataset_mnli_custom_bert_class_task.csv'), index=False)
+    result.to_csv(os.path.join(saved_model_dir, 'results_dataset_mnli_custom_bert4seqclass.csv'), index=False)
 
 if __name__ == '__main__':
     main()
