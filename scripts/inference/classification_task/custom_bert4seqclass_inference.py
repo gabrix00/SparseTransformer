@@ -6,9 +6,10 @@ import numpy as np
 import pandas as pd
 import math
 import os
+from tqdm import tqdm 
 import datetime, pytz
 from matplotlib import pyplot as plt
-from datasets import load_dataset, Dataset
+from datasets import load_dataset, Dataset, DatasetDict
 from sklearn.model_selection import train_test_split
 
 from transformers import AutoTokenizer,BertForSequenceClassification, AdamW, BertModel, BertForSequenceClassification
@@ -17,13 +18,10 @@ from transformers.modeling_outputs import  SequenceClassifierOutput
 from torch.nn import CrossEntropyLoss, MSELoss, BCEWithLogitsLoss
 
 
-#DA CLASS TASK
 import sys
 sys.path.append(os.path.join(os.getcwd(),'scripts'))
 from normalization import normalizzation
 from masking_process import mask_multiple_sentences, rmasking
-
-#--------------------------------
 
 
 class BertOnlyMLMHead(nn.Module):
@@ -346,7 +344,7 @@ class CustomSelfAttention(nn.Module):
             outputs = outputs + (past_key_value,)
         return outputs
 
-#---------------------
+
 #-----------------------------------------------------------------------------------------------------------------
 
 def compute_attention(mask:torch.Tensor):
@@ -423,7 +421,6 @@ def process_mask(mask,gabriel_mask,max_len):
 
 #–-------------------------------------------------
 
-
 class Dataset:
     def __init__(self, texts_a, texts_b, labels, idx, tokenizer, max_len):
         self.texts_a = texts_a
@@ -456,7 +453,7 @@ class Dataset:
         mask = inputs["attention_mask"]
 
         #gabriel_mask_path = os.path.join('/kaggle/input/gabriel-mask/gabriel_mask', f'gm_{id}.npy') #on kaggle
-        gabriel_mask_path = os.path.join('experiments/training/class_task/gabriel_mask', f'gm_{id}.npy') 
+        gabriel_mask_path = os.path.join('experiments/validation/class_task/gabriel_mask', f'gm_{id}.npy') 
         try:
             gabriel_mask = np.load(gabriel_mask_path)
             print(f'gm_{id}.npy founded!')
@@ -470,130 +467,14 @@ class Dataset:
             
         
         return {
+            'text_concat':text_concat, # solo in inferenza per check finale
             "ids": torch.tensor(ids, dtype=torch.long),
             "label": torch.tensor(label, dtype=torch.long),
             "mask": torch.tensor(mask, dtype=torch.long),
             "gabriel_mask": torch.tensor(gabriel_mask, dtype=torch.long),
         }
-
-def training_bert_model_4_mlm_task(model, optimizer, hyper_params, dataloaders, num_labels, saved_dir, start_epochs):
-
-    optimizer = AdamW(model.parameters(), lr=hyper_params['learning_rate'])
-
-    best_model_wts = model.state_dict() #si salva i pesi del modello al t0
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-
-    best_loss = {"train": float('inf'), "val": float('inf')} 
-    history_loss = {"train": [], "val": []}
-    history_accuracy = {"train": [], "val": []}
-
-    epochs = hyper_params['epochs']
-
-    total_epochs = epochs+start_epochs
-    for epoch in range(start_epochs,total_epochs):
-        print(f'Epoch {epoch}/{total_epochs - 1}')
-        print('-' * 50)
-
-        # Initialize epoch variables
-        sum_loss = {"train": 0, "val": 0}
-        correct_preds = {"train": 0, "val": 0}  
-        total_samples = {"train": 0, "val": 0} 
-
-        
-        # Process each split
-        for split in ["train", "val"]:
-            if split == "train":
-                model.train()
-            else:
-                model.eval()
-
-            # Process each batch
-            for batch in dataloaders[split]:
-                ids = batch["ids"].to(device)
-                mask = batch["mask"].to(device)
-                labels = batch['label'].to(device)
-                gabriel_mask = batch["gabriel_mask"].to(device)
-
-                labels_one_hot = torch.nn.functional.one_hot(labels, num_classes=num_labels).float().to(device)
-                
-                optimizer.zero_grad()
-
-                output = model(input_ids=ids, attention_mask=mask, gabriel_mask= gabriel_mask, labels=labels_one_hot)
-
-                loss = output.loss 
-
-                sum_loss[split] += loss.item() #batch loss
- 
-                if split == "train":
-                    # Compute gradients
-                    loss.backward()
-                    # Optimize
-                    optimizer.step()
-                
-                preds = torch.argmax(output.logits, dim =1)
-                
-                # Compute batch accuracy
-                correct_preds[split] += (preds == labels).sum().item()
-                total_samples[split] += labels.size(0)  #labels è solo per contare quanti elemnti nel batch ci sono
-
-
-        # Compute epoch loss/accuracy
-        epoch_loss = {split: sum_loss[split] / len(dataloaders[split]) for split in ["train", "val"]} #len(dataloaders[split]) gives you the number of batches in that DataLoader.
-        epoch_accuracy = {split: correct_preds[split] / total_samples[split] for split in ["train", "val"]}
-
-        # Update history
-        for split in ["train", "val"]:
-            history_loss[split].append(epoch_loss[split])
-            history_accuracy[split].append(epoch_accuracy[split])
-
-        if epoch_loss['train'] < best_loss['train']:  # Compare train loss with best train loss
-            best_loss = epoch_loss
-            best_model_wts = model.state_dict()
-
-        print(f"Train Loss: {epoch_loss['train']:.4f}, Train Acc: {epoch_accuracy['train']:.4f}")
-        print(f"Val Loss: {epoch_loss['val']:.4f}, Val Acc: {epoch_accuracy['val']:.4f}")
-
-
-        model.load_state_dict(best_model_wts) #ad ogni epoca si salva comunque i pesi migliori
-
-
-    # Plot and saving loss
-    plt.figure(figsize=(10, 6))  
-    plt.title("Loss")
-    for split in ["train", "val"]:
-        plt.plot(history_loss[split], label=split)
-    plt.xlabel("Epoch")
-    plt.ylabel("Loss")
-    plt.legend()
-    plt.grid(True)
-    plt.savefig(os.path.join(os.getcwd(),"loss_plot.png"), dpi=300, bbox_inches="tight")  #
-    plt.close()  
-
-    # Plot and saving accuracy
-    plt.figure(figsize=(10, 6))
-    plt.title("Accuracy")
-    for split in ["train", "val"]:
-        plt.plot(history_accuracy[split], label=split)
-    plt.xlabel("Epoch")
-    plt.ylabel("Accuracy")
-    plt.legend()
-    plt.grid(True)
-    plt.savefig(os.path.join(os.getcwd(),"accuracy_plot.png"), dpi=300, bbox_inches="tight")
-    plt.close()  
-
-    model_path = os.path.join(saved_dir,'checkpoint.pt')
-    torch.save({
-        'epoch': epoch+start_epochs,
-        'model_state_dict': model.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict(),
-        'loss': epoch_loss['train']},  model_path)
-
-    #torch.save(model.state_dict(),model_path)       
-
-    return 1
-
+    
+###------------- fino a qui è il codice di custom_bert4seqclass_finetuning
 
 def main(checkpoint_path = None):
     
@@ -609,92 +490,100 @@ def main(checkpoint_path = None):
 
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-   
+
+    task = 'inference'
     dataset_name = "mnli"
     pretrained_model = "bert-base-uncased"
-    task ='classification_task'
 
-    model_name = pretrained_model + "_" + pst_now.strftime("%Y-%m-%d_%H-%M-%S")
-    saved_model_dir = os.path.join(os.getcwd(),'scripts','finetuning',task,'results', model_name)
+    model_name = pretrained_model + "_" + task + "_" + dataset_name + "_" + pst_now.strftime("%Y-%m-%d_%H-%M-%S")
+    saved_model_dir = os.path.join(os.getcwd(),'results_Kaggle', model_name)
     os.makedirs(saved_model_dir, exist_ok=True)
 
-    # Model parameters
-    hyper_params = {'epochs' : 10, 'batch_size' : 64, 'learning_rate' : 5e-5}
-
-    num_labels = 3   
-    #mette custom_bert 
-    model = CustomformerForSequenceClassification.from_pretrained(pretrained_model,
-                                                          num_labels=num_labels,  # MNLI has 3 labels: 'entailment', 'neutral', 'contradiction'
-                                                          problem_type="multi_label_classification",
-                                                          ignore_mismatched_sizes=True) 
-    
-
-    tokenizer = AutoTokenizer.from_pretrained(pretrained_model)
-
-    optimizer = AdamW(model.parameters(), lr=hyper_params['learning_rate']) #di feafult
-
-    if checkpoint_path:
-        checkpoint = torch.load(checkpoint_path)
-        model.load_state_dict(checkpoint['model_state_dict'])
-        optimizer.load_state_dict(checkpoint['optimizer_state_dict']) 
-        loss = checkpoint['loss']
-        print(f'avg loss checkpoint: {loss}')
-        start_epoch = checkpoint['epoch'] + 1
-        print(f'start_epoch: {start_epoch}')
-    else:
-        start_epoch = 0
-
+   
+    batch_size = 1
 
 
     dataset = load_dataset("LysandreJik/glue-mnli-train")
     dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
-    #print(dataset)
 
-    sliced_train_dataset = pd.DataFrame(dataset["train"][:10])
-
-    train_df, val_df = train_test_split(sliced_train_dataset, test_size=0.2, random_state=seed)
-
-    train_df.reset_index(drop=True, inplace=True)
-    val_df.reset_index(drop=True, inplace=True)
+    sliced_test_dataset = pd.DataFrame(dataset["validation"])  
+    
+    
+    num_labels = 3   
+    
+    model = CustomformerForSequenceClassification.from_pretrained(pretrained_model,
+                                                          num_labels=num_labels,  # MNLI has 3 labels: 'entailment', 'neutral', 'contradiction'
+                                                          problem_type="multi_label_classification",
+                                                          ignore_mismatched_sizes=True)
 
     
-    train_dataset = Dataset(texts_a = train_df['premise'],#filtered_dataset["train"]['premise'], #old
-                            texts_b = train_df['hypothesis'],
-                            labels = train_df['label'],
-                            idx = train_df['idx'],
+    if checkpoint_path:
+        checkpoint = torch.load(checkpoint_path)
+        model.load_state_dict(checkpoint['model_state_dict'])
+    
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+
+    tokenizer = AutoTokenizer.from_pretrained(pretrained_model)
+
+ 
+    test_dataset = Dataset(texts_a = sliced_test_dataset['premise'],#filtered_dataset["train"]['premise'], #old
+                            texts_b = sliced_test_dataset['hypothesis'],
+                            labels = sliced_test_dataset['label'],
+                            idx = sliced_test_dataset['idx'],
                             tokenizer = tokenizer,
                             max_len = 100)
     
-    validation_dataset = Dataset(texts_a = val_df['premise'],#filtered_dataset["train"]['premise'], #old
-                                 texts_b = val_df['hypothesis'],
-                                 labels = val_df['label'],
-                                 idx = val_df['idx'],
-                                 tokenizer = tokenizer,
-                                 max_len = 100)
+    test_data_loader = DataLoader(test_dataset,
+                                  batch_size=batch_size,
+                                  shuffle = False,
+                                  pin_memory=True)  # Transfer tensors to CUDA in a more efficient way
     
-    train_data_loader = DataLoader(train_dataset,
-                                   batch_size=hyper_params['batch_size'],
-                                   shuffle = True,
-                                   pin_memory=True)  # Transfer tensors to CUDA in a more efficient way
+    progress_bar = tqdm(range(len(sliced_test_dataset['idx'])))
+
+
+    # Initialize lists for storing results
+    text_analyzed_list = []
+    loss_list = []
+    pred_list = []
+    labels_list = []
+
+    model.eval()
+    for bi, batch in enumerate(test_data_loader):
+        ids = batch["ids"].to(device)
+        mask = batch["mask"].to(device)
+        gabriel_mask = batch["gabriel_mask"].to(device)
+        labels = batch['label'].to(device)
+
+        labels_one_hot = torch.nn.functional.one_hot(labels, num_classes=num_labels).float().to(device)
+
+        with torch.no_grad():
+            output = model(input_ids=ids, attention_mask=mask, gabriel_mask=gabriel_mask, labels=labels_one_hot)
+
+        loss = output.loss 
+
+        pred_class = torch.argmax(output.logits, dim =1)
+
+
+        # Append results to lists
+        text_analyzed_list.extend(batch['text_concat'])
+        loss_list.append(loss.item())
+        pred_list.extend([pred_class])
+        labels_list.extend(batch['label'][0])
+        
+        progress_bar.update(1)
+
+
+        # Save results to a CSV file
+    result = pd.DataFrame({
+    'sentence': text_analyzed_list,
+    'pred': pred_list,
+    'label': labels_list,
+    'loss': loss_list,
+    })
     
-    train_data_loader = DataLoader(validation_dataset,
-                                   batch_size=hyper_params['batch_size'],
-                                   shuffle = True,
-                                   pin_memory=True)
-    
-
-    dataloaders = {'train': train_data_loader,'val': train_data_loader}
-
-    checkpoint = training_bert_model_4_mlm_task(model=model,optimizer=optimizer,
-                                   hyper_params=hyper_params,
-                                   dataloaders=dataloaders,
-                                   num_labels=num_labels, saved_dir=saved_model_dir,start_epochs=start_epoch)
-
-
-
+    result.to_csv(os.path.join(saved_model_dir, 'results_dataset_mnli_custom_bert_class_task.csv'), index=False)
 
 if __name__ == '__main__':
-    #checkpoint_path = "..."" # Change this to the path of your checkpoint
-    #checkpoint_path = os.path.join(os.getcwd(),'scripts/finetuning/mlm_task/results/bert-base-uncased_2024-06-26_16-25-02/checkpoint.pt')
-    #main(checkpoint_path)
     main()

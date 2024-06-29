@@ -3,3 +3,4 @@
 *.log
 ricevimento_20-06-24.py
 mask_generation.log
+*.pt
