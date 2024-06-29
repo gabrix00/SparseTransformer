@@ -24,7 +24,7 @@ def masking (text, viz = False, path=None):
         return from_parser2masking(text,dependency_pairs_list)
 
 
-def rmasking (text,rand_mask,viz = False, path=None): # Dont use text.lower()! it will cause error! with [SEP] token 
+def rmasking (text,rand_mask, viz = False, path=None): # Dont use text.lower()! it will cause error! with [SEP] token 
     if viz: 
         if path:
             return from_tensor2masking(text,rand_mask,viz = True, path = path)

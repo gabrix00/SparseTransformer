@@ -203,18 +203,16 @@ def main(checkpoint_path = None):
     dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
     #print(dataset)
 
-    sliced_train_dataset = DatasetDict(dataset["train"][:])
-    
+    sliced_train_dataset = pd.DataFrame(dataset["train"])
 
-    # Split the data into training and validation sets
-    train, val = train_test_split(sliced_train_dataset['premise'], test_size=0.2, random_state=seed)
-
+    train_df, val_df = train_test_split(sliced_train_dataset, test_size=0.2, random_state=seed)
     
-    train_dataset = Dataset(texts_a= train,#filtered_dataset["train"]['premise'], #old
+    
+    train_dataset = Dataset(texts_a= train_df['premise'],#filtered_dataset["train"]['premise'], #old
                             tokenizer=tokenizer,
                             max_len=100)
     
-    validation_dataset = Dataset(texts_a= val,#filtered_dataset["train"]['premise'], #old
+    validation_dataset = Dataset(texts_a= val_df['premise'],#filtered_dataset["train"]['premise'], #old
                                 tokenizer=tokenizer,
                                 max_len=100)
     
