@@ -177,7 +177,7 @@ def main(checkpoint_path = None):
     os.makedirs(saved_model_dir, exist_ok=True)
 
     # Model parameters
-    hyper_params = {'epochs' : 5, 'batch_size' : 64, 'learning_rate' : 5e-5}
+    hyper_params = {'epochs' : 10, 'batch_size' : 64, 'learning_rate' : 5e-5}
 
     
     model = BertForMaskedLM.from_pretrained(pretrained_model)
@@ -206,6 +206,9 @@ def main(checkpoint_path = None):
     sliced_train_dataset = pd.DataFrame(dataset["train"])
 
     train_df, val_df = train_test_split(sliced_train_dataset, test_size=0.2, random_state=seed)
+
+    train_df.reset_index(drop=True, inplace=True)
+    val_df.reset_index(drop=True, inplace=True)
     
     
     train_dataset = Dataset(texts_a= train_df['premise'],#filtered_dataset["train"]['premise'], #old
