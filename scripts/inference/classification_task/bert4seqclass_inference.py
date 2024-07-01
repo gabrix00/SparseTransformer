@@ -71,7 +71,7 @@ def main(checkpoint_path = None):
     pretrained_model = "bert-base-uncased"
 
     model_name = pretrained_model + "_" + task + "_" + dataset_name + "_" + pst_now.strftime("%Y-%m-%d_%H-%M-%S")
-    saved_model_dir = os.path.join(os.getcwd(),'results_test', model_name)
+    saved_model_dir = os.path.join(os.getcwd(),'results_test','class_task', model_name)
     os.makedirs(saved_model_dir, exist_ok=True)
 
    

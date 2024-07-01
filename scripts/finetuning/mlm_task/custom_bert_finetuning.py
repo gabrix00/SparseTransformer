@@ -15,7 +15,7 @@ from datasets import load_dataset
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
 
-from transformers import AutoTokenizer, AdamW, BertForMaskedLM, BertModel,
+from transformers import AutoTokenizer, AdamW, BertForMaskedLM, BertModel
 from transformers.activations import  ACT2FN
 from transformers.modeling_outputs import  MaskedLMOutput                             
 from torch.nn import CrossEntropyLoss

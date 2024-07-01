@@ -64,7 +64,7 @@ def main(checkpoint_path = None):
     pretrained_model = "bert-base-uncased"
 
     model_name = pretrained_model + "_" + task + "_"+ dataset_name + "_" + pst_now.strftime("%Y-%m-%d_%H-%M-%S")
-    saved_model_dir = os.path.join(os.getcwd(), 'results', model_name)
+    saved_model_dir = os.path.join(os.getcwd(), 'results_test','mlm_task', model_name)
     os.makedirs(saved_model_dir, exist_ok=True)
     
 
@@ -73,55 +73,39 @@ def main(checkpoint_path = None):
 
     dataset = load_dataset("LysandreJik/glue-mnli-train")
     dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
-    print(dataset)
 
-    sliced_train_dataset = DatasetDict(dataset["train"][:1000])
-    print(sliced_train_dataset)
-
-    
-    
-    #dataset = load_dataset("LysandreJik/glue-mnli-train")
-    #dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
-
-    # Slice the dataset for validation
-    #sliced_validation_dataset = dataset["validation"][:]
-    #sliced_training_dataset = dataset["train"][:1000] #only for didactic purpose
-
-    #filtered_dataset = DatasetDict({"validation": sliced_validation_dataset})#old
-    #filtered_dataset = DatasetDict({"train": sliced_training_dataset})#old
+    sliced_test_dataset = pd.DataFrame(dataset["validation"]) 
     
     model = BertForMaskedLM.from_pretrained(pretrained_model)
-    
-    if checkpoint_path:
-        checkpoint = torch.load(checkpoint_path)
-        model.load_state_dict(checkpoint['model_state_dict'])
-        # es :checkpoint_path = "/kaggle/input/bert-mlm-finetuning2/checkpoint_epoch_15.pt"
-
 
 
     tokenizer = AutoTokenizer.from_pretrained(pretrained_model)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    if checkpoint_path:
+        checkpoint = torch.load(checkpoint_path, map_location=torch.device(device))
+        model.load_state_dict(checkpoint['model_state_dict'])
+        print('model loaded succesfully')
+
     model.to(device)
 
  
-    train_dataset = Dataset(texts_a= sliced_train_dataset['premise'],#filtered_dataset["train"]['premise'], #old
+    train_dataset = Dataset(texts_a= sliced_test_dataset['premise'],#filtered_dataset["train"]['premise'], #old
                             tokenizer=tokenizer,
                             max_len=100)
     
     train_data_loader = DataLoader(train_dataset,
                                    batch_size=batch_size,
-                                   #shuffle=True, only for didactic assignement
                                    shuffle = False,
                                    pin_memory=True)  # Transfer tensors to CUDA in a more efficient way
     
-    progress_bar = tqdm(range(len(sliced_train_dataset['idx'])))
+    progress_bar = tqdm(range(len(sliced_test_dataset['idx'])))
 
     # Initialize lists for storing results
     text_analyzed_list = []
     loss_list = []
     pred_list = []
-    #probs_list = []
     labels_list = []
 
     model.eval()
@@ -169,16 +153,18 @@ def main(checkpoint_path = None):
         
         progress_bar.update(1)
         
+        
     # Save results to a CSV file
     result = pd.DataFrame({
         'sentence': text_analyzed_list,
         'pred': pred_list,
         'label': labels_list,
         'loss': loss_list,
-        #'probs': probs_list
     })
     
     result.to_csv(os.path.join(saved_model_dir,'results_dataset_mnli_bert_mlm_task.csv'), index=False)
 
 if __name__ == '__main__':
+    #checkpoint_path = '/Users/gabrieletuccio/Developer/GitHub/SparseTransformer/finetuned_model/bert_finetuning/checkpoint.pt'
+    #main(checkpoint_path=checkpoint_path)
     main()

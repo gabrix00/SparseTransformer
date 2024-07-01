@@ -5,9 +5,9 @@ import numpy as np
 from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
 
 
-path1 = os.getcwd()+'/results_test/bert-base-uncased_inference_mnli_2024-06-29_17-54-04/results_dataset_mnli_bert4seqclass.csv' 
+path1 = os.getcwd()+'/results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_17-54-04/results_dataset_mnli_bert4seqclass.csv' 
 
-path2 = os.getcwd()+'/results_test/bert-base-uncased_inference_mnli_2024-06-29_18-40-49/results_dataset_mnli_custom_bert4seqclass.csv'
+path2 = os.getcwd()+'/results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_18-40-49/results_dataset_mnli_custom_bert4seqclass.csv'
 
 
 df1 = pd.read_csv(path1)
