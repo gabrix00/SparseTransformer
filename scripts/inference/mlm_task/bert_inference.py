@@ -165,6 +165,6 @@ def main(checkpoint_path = None):
     result.to_csv(os.path.join(saved_model_dir,'results_dataset_mnli_bert_mlm_task.csv'), index=False)
 
 if __name__ == '__main__':
-    #checkpoint_path = '/Users/gabrieletuccio/Developer/GitHub/SparseTransformer/finetuned_model/bert_finetuning/checkpoint.pt'
-    #main(checkpoint_path=checkpoint_path)
-    main()
+    checkpoint_path = '/Users/gabrieletuccio/Developer/GitHub/SparseTransformer/finetuned_model/bert_finetuning/checkpoint.pt'
+    main(checkpoint_path=checkpoint_path)
+    #main()
