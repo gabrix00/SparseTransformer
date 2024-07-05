@@ -54,9 +54,9 @@ def from_tensor2masking(text:str, rand_mask:torch.tensor, viz:bool = False, path
 
         if path:
             plt.savefig(path, dpi=300, bbox_inches="tight")
-
-        plt.close()
-        #plt.show() #momentanemante
+            plt.close()
+        
+        plt.show() #momentanemante
 
     #print(mask)
     #return torch.tensor(mask)

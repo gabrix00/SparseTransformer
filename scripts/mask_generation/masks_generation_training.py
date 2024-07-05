@@ -268,7 +268,6 @@ def main():
         """
 
         #FOR CLASSIFICATION TASK    
-
         if f'gm_{id}.npy' not in os.listdir(gm_class_dir):
             gabriel_mask_class = batch["gabriel_mask_class"]
             np.save(os.path.join(gm_class_dir, f'gm_{id}.npy'), gabriel_mask_class)
