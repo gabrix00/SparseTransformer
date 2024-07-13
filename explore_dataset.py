@@ -4,11 +4,12 @@ import pandas as pd
 
 
 dataset = load_dataset("LysandreJik/glue-mnli-train")
-dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
+#dataset = dataset.filter(lambda example: len(example["premise"]) <= 120 and len(example["hypothesis"]) <= 120)
 #sliced_train_dataset = DatasetDict(dataset["train"][3952:3954])
 #sliced_train_dataset = DatasetDict(dataset["train"][3949:3954])
 #sliced_train_dataset = DatasetDict(dataset["train"][12403:12404])
-sliced_train_dataset = pd.DataFrame(dataset["train"][:10])
+sliced_train_dataset = pd.DataFrame(dataset["train"][:])
+print(sliced_train_dataset.shape)
 #sliced_train_dataset.reset_index(drop=True, inplace=True)
 
 # Convert the dataset to a pandas DataFrame

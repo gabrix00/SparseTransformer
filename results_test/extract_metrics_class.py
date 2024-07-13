@@ -40,6 +40,24 @@ def plot_confusion_matrix(y_true, y_pred, model_name, path):
     plt.savefig(os.path.join(path, f'confusion_matrix_{model_name}.png'), dpi=300, bbox_inches='tight')
     plt.close()
 
+def plot_confusion_matrix_transp(y_true, y_pred, model_name, path):
+    # Map the numerical labels to their string equivalents
+    unique_labels = sorted(set(y_true) | set(y_pred))
+    mapped_labels = [mapp_labels(label) for label in unique_labels]
+    
+    # Compute confusion matrix
+    cm = confusion_matrix(y_true, y_pred, labels=unique_labels)
+    cm_inverted = cm.T  # Trasponi la matrice di confusione per riflettere l'inversione degli assi
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cm_inverted, annot=True, fmt='d', cmap='Blues', xticklabels=mapped_labels, yticklabels=mapped_labels)
+    plt.title(f'Confusion Matrix - {model_name}')
+    plt.xlabel('True Label')  # Inverti asse x e asse y
+    plt.ylabel('Predicted Label')  # Inverti asse x e asse y
+    plt.savefig(os.path.join(path, f'confusion_matrix_{model_name}.png'), dpi=300, bbox_inches='tight')
+    plt.close()
+
+
+
 def plot_confusion_matrix_old(y_true, y_pred, model_name, path):
     cm = confusion_matrix(y_true, y_pred)
     plt.figure(figsize=(10, 8))
@@ -83,7 +101,7 @@ print_metrics_per_class(df1['label'], df1['pred'], "Bert4SeqClass")
 print_metrics_per_class(df2['label'], df2['pred'], "CustomBert4SeqClass")
 
 # Plot per Bert4SeqClass
-plot_confusion_matrix(df1['label'], df1['pred'], 'Bert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_17-54-04')
+plot_confusion_matrix_transp(df1['label'], df1['pred'], 'Bert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_17-54-04')
 
 # Plot per CustomBertForSeqClass
-plot_confusion_matrix(df2['label'], df2['pred'], 'CustomBert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_18-40-49')
+plot_confusion_matrix_transp(df2['label'], df2['pred'], 'CustomBert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_18-40-49')
