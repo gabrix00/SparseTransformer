@@ -3,7 +3,7 @@ Explainable Sparse Attention Mechanism
 This project aims to assess the effectiveness of a proposed sparse attention mechanism in natural language processing tasks. Two experimental frameworks are implemented: Masked Language Modeling (MLM) and Natural Language Inference (NLI), using the MultiNLI dataset (a common sense dataset). The project compares the performance of a classic BERT-Base model with a custom version that incorporates the sparse attention mechanism.
 
 ## Experimental Frameworks
-*  Masked Language Modeling (MLM)
+* Masked Language Modeling (MLM)
   - Task: Predicting masked words in a sentence.
   - Dataset: MultiNLI.
 * Natural Language Inference (NLI)
