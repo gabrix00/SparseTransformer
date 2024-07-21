@@ -15,7 +15,7 @@ This project aims to evaluate the effectiveness of a proposed sparse attention m
 ## Key Findings
 The Custom model showed only a 12% decrease in performance compared to the classic BERT-Base model in both MLM and NLI tasks.
 The Custom model used significantly less contextual information: one third on average for the MLM task and one fifth on average for the NLI task.
-These results underscore the "quality" of the "contextual" information considered by the Custom model, demonstrating the effectiveness of the sparse attention mechanism.
+These results underscore the "quality" of the "contextual" information considered by the Custom model, demonstrating the effectiveness of the sparse attention mechanism proposed.
 ## Requirements
 Python 3.x
 Libraries: TensorFlow or PyTorch, Transformers, scikit-learn, numpy, pandas, Spacy
