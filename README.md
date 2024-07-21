@@ -1,6 +1,6 @@
 Explainable Sparse Attention Mechanism
 # Project Overview
-This project aims to evaluate the effectiveness of a proposed sparse attention mechanism called "Syntactic Based Attention." This mechanism utilizes the prior information from a Dependency Parsing algorithm to constrain the attention mechanism in an explainable manner, rather than heuristically. Two experimental frameworks are implemented: Masked Language Modeling (MLM) and Natural Language Inference (NLI), using the MultiNLI dataset (a common sense dataset). The project compares the performance of a classic BERT-Base model with a custom version that incorporates the sparse attention mechanism.
+This project aims to evaluate the effectiveness of a proposed sparse attention mechanism called "Syntactic Based Attention". This mechanism utilizes the prior information from a Dependency Parsing algorithm to constrain the attention mechanism in an explainable manner, rather than heuristically. Two experimental frameworks are implemented: Masked Language Modeling (MLM) and Natural Language Inference (NLI), using the MultiNLI dataset (a common sense dataset). The project compares the performance of a classic BERT-Base model with a custom version that incorporates the sparse attention mechanism.
 
 ## Experimental Frameworks
 * Masked Language Modeling (MLM)
