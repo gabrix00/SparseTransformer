@@ -4,6 +4,7 @@ import os
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from sklearn.metrics import classification_report
 
 path1 = os.getcwd()+'/results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_17-54-04/results_dataset_mnli_bert4seqclass.csv' 
 path2 = os.getcwd()+'/results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_18-40-49/results_dataset_mnli_custom_bert4seqclass.csv'
@@ -94,6 +95,15 @@ def print_metrics_per_class(y_true, y_pred, model_name):
 
     print('\n\n')
 
+def class_report(y_true, y_pred):
+    "for classification report"
+    unique_labels = sorted(set(y_true) | set(y_pred))
+    mapped_labels = [mapp_labels(label) for label in unique_labels]
+    
+    print(classification_report(y_true, y_pred, target_names=mapped_labels))
+
+class_report(df1['label'], df1['pred']) #chage df according the model
+
 # Per il primo modello (Bert4SeqClass)
 print_metrics_per_class(df1['label'], df1['pred'], "Bert4SeqClass")
 
@@ -101,7 +111,9 @@ print_metrics_per_class(df1['label'], df1['pred'], "Bert4SeqClass")
 print_metrics_per_class(df2['label'], df2['pred'], "CustomBert4SeqClass")
 
 # Plot per Bert4SeqClass
-plot_confusion_matrix_transp(df1['label'], df1['pred'], 'Bert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_17-54-04')
+#plot_confusion_matrix_transp(df1['label'], df1['pred'], 'Bert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_17-54-04')
 
 # Plot per CustomBertForSeqClass
-plot_confusion_matrix_transp(df2['label'], df2['pred'], 'CustomBert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_18-40-49')
+#plot_confusion_matrix_transp(df2['label'], df2['pred'], 'CustomBert4SeqClass',path='results_test/class_task/bert-base-uncased_inference_mnli_2024-06-29_18-40-49')
+
+
