@@ -18,4 +18,4 @@ The Custom model used significantly less contextual information: one third on av
 These results underscore the "quality" of the "contextual" information considered by the Custom model, demonstrating the effectiveness of the sparse attention mechanism proposed.
 ## Requirements
 Python 3.x
-Libraries: TensorFlow or PyTorch, Transformers, scikit-learn, numpy, pandas, Spacy
+Libraries: PyTorch, Transformers, scikit-learn, numpy, pandas, Spacy
