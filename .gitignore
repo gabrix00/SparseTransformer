@@ -1,11 +1,10 @@
 *.txt
 *.npy
 *.log
-ricevimento_20-06-24.py
 mask_generation.log
 *.pt
 .DS_Store
 __pycache__
-plot_presentation
-ricevimento_20-06-24
+plot_presentation.py
+ricevimento_20-06-24.py
 mask_generation.log
