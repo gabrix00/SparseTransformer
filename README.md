@@ -10,7 +10,7 @@ This project aims to evaluate the effectiveness of a proposed sparse attention m
   - Task: Determining if a given hypothesis is true (entailment), false (contradiction), or undetermined (neutral) based on a premise.
   - Dataset: MultiNLI.
 ## Models Compared
- * BERT-Base ModeL: A classic, widely used transformer model for natural language processing tasks.
+ * BERT-Base Model: a classic, widely used transformer model for natural language processing tasks.
  *  Custom Model which incorporates the proposed sparse attention mechanism.
 ## Key Findings
 The Custom model showed only a 12% decrease in performance compared to the classic BERT-Base model in both MLM and NLI tasks.
